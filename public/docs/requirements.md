@@ -19,15 +19,15 @@ If the MVP does nothing else, it must let a team **invite → interview → scor
 **In scope (MVP)**
 - Create an interview room for a role, with a fixed question plan
 - Invite a candidate via a browser link (no account, no install)
-- Live 1:1 video interview
+- Live video interview with a **panel of multiple interviewers** in the same room
+- **Shared live code editor** and a **shared whiteboard** inside the room
 - Live integrity signals (tab switch, paste, second person)
+- **AI question generation** and **AI-assisted (draft) auto-scoring**
 - Recording + criteria-based scorecard + hire/no-hire decision
 - A simple dashboard of interviews
 
 **Out of scope (later)**
-- Group/panel-in-room (multiple live interviewers)
 - ATS integrations, calendar sync, billing
-- AI question generation, auto-scoring
 - Mobile native apps
 
 ---
@@ -43,6 +43,7 @@ If the MVP does nothing else, it must let a team **invite → interview → scor
 | US-1 | As a **recruiter**, I want to **create an interview room for a role**, so that I can invite a candidate to a live session. | M | [Dashboard](/demo/dashboard.html) |
 | US-2 | As a **recruiter**, I want to **add a fixed list of questions**, so that every candidate for the role is asked the same things. | M | [Live room](/demo/room.html) |
 | US-3 | As a **recruiter**, I want to **send the candidate a join link**, so that they can enter without installing anything. | M | [Invite](/demo/candidate-invite.html) |
+| US-14 | As a **recruiter**, I want **AI to suggest role-specific questions** for the plan, so that I can build a fair, thorough interview faster. | S | [Live room](/demo/room.html) |
 
 ### Epic B — Run the live interview *(Interviewer)*
 | # | User story | Priority | Screen |
@@ -50,6 +51,9 @@ If the MVP does nothing else, it must let a team **invite → interview → scor
 | US-4 | As an **interviewer**, I want to **talk to the candidate over live video**, so that I can assess them in real time. | M | [Live room](/demo/room.html) |
 | US-5 | As an **interviewer**, I want to **follow and check off the question plan**, so that I stay on track and cover everything. | S | [Live room](/demo/room.html) |
 | US-6 | As an **interviewer**, I want to **see integrity signals as they happen**, so that I can trust what I'm seeing. | M | [Live room](/demo/room.html) |
+| US-15 | As an **interviewer**, I want to **invite co-interviewers into the same room** as a panel, so that we can assess the candidate together live. | M | [Live room](/demo/room.html) |
+| US-16 | As an **interviewer and candidate**, we want a **shared live code editor** in the room, so that we can write and run code together in real time. | M | [Live room](/demo/room.html) |
+| US-17 | As an **interviewer and candidate**, we want a **shared whiteboard** in the room, so that we can sketch system designs and diagrams together. | S | [Live room](/demo/room.html) |
 
 ### Epic C — Join as a candidate *(Candidate)*
 | # | User story | Priority | Screen |
@@ -64,6 +68,7 @@ If the MVP does nothing else, it must let a team **invite → interview → scor
 | US-10 | As an **interviewer**, I want to **score the candidate against fixed criteria**, so that decisions are consistent and comparable. | M | [Review](/demo/review.html) |
 | US-11 | As an **interviewer**, I want to **replay the recording and jump to flagged moments**, so that I can judge them in context. | S | [Review](/demo/review.html) |
 | US-12 | As a **hiring panel**, I want to **record a hire / no-hire decision**, so that we close the loop on the candidate. | M | [Review](/demo/review.html) |
+| US-18 | As an **interviewer**, I want **AI-assisted draft scores and a transcript summary** after the call, so that scoring is faster — with the human making the final call. | S | [Review](/demo/review.html) |
 
 ### Epic E — See the pipeline *(Recruiter)*
 | # | User story | Priority | Screen |
@@ -84,7 +89,7 @@ If the MVP does nothing else, it must let a team **invite → interview → scor
 | NFR-6 | **Reliability** | 99.9% uptime target; automatic reconnect on brief network drops; recording survives a refresh. |
 | NFR-7 | **Compatibility** | Works on current Chrome, Edge, Safari, and Firefox, on desktop and tablet — no plugins. |
 | NFR-8 | **Scalability** | Handles many concurrent interview rooms without quality loss. |
-| NFR-9 | **Fairness / integrity** | Every candidate for a role gets the same questions and scoring criteria; integrity flags are surfaced as *signals*, never automatic verdicts. |
+| NFR-9 | **Fairness / integrity** | Every candidate for a role gets the same questions and scoring criteria; integrity flags and AI draft scores are surfaced as *signals/suggestions*, never automatic verdicts — a human always makes the final call. |
 | NFR-10 | **Observability** | A health endpoint and basic logging so uptime and errors can be monitored. |
 
 ---
@@ -93,9 +98,11 @@ If the MVP does nothing else, it must let a team **invite → interview → scor
 
 - [ ] A recruiter can create a room, add questions, and share a link.
 - [ ] A candidate can join in a browser, pass a device check, and consent.
-- [ ] Interviewer and candidate can see and hear each other live.
+- [ ] Interviewer(s) and candidate can see and hear each other live, with a panel able to join the same room.
+- [ ] The room has a working shared code editor and a shared whiteboard.
+- [ ] AI can suggest questions when building the plan.
 - [ ] Integrity signals appear during the call.
-- [ ] The interview is recorded and can be scored on fixed criteria.
+- [ ] The interview is recorded and can be scored on fixed criteria, with AI draft scores as a starting point.
 - [ ] A hire / no-hire decision is captured.
 - [ ] All screens meet NFR-2 (usability) and NFR-3 (accessibility) basics.
 

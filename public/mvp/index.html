@@ -98,8 +98,10 @@
       <ul>
         <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Create an interview room for a role with a fixed question plan</li>
         <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Invite a candidate via a browser link — no account, no install</li>
-        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Live 1:1 video interview</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Live video interview with a <b>panel of multiple interviewers</b> in one room</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> <b>Shared live code editor</b> and <b>shared whiteboard</b> in the room</li>
         <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Live integrity signals: tab switch, paste, second person</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> <b>AI question generation</b> and <b>AI-assisted draft scoring</b></li>
         <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Recording + criteria scorecard + hire/no-hire decision</li>
         <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> A simple dashboard of interviews</li>
       </ul>
@@ -107,9 +109,7 @@
     <div class="col out">
       <h3><span class="pill grey">Out of scope — later</span></h3>
       <ul>
-        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg> Multiple live interviewers in one room</li>
         <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg> ATS integrations, calendar sync, billing</li>
-        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg> AI question generation & auto-scoring</li>
         <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg> Native mobile apps</li>
       </ul>
     </div>
@@ -118,13 +118,14 @@
 
 <!-- Functional -->
 <section class="wrap section">
-  <div class="band"><span class="bn">1</span><h2>Functional requirements</h2><span class="line"></span><span class="cnt">13 user stories · <b style="color:var(--red)">M</b> must · <b style="color:var(--yellow)">S</b> should</span></div>
+  <div class="band"><span class="bn">1</span><h2>Functional requirements</h2><span class="line"></span><span class="cnt">18 user stories · <b style="color:var(--red)">M</b> must · <b style="color:var(--yellow)">S</b> should</span></div>
 
   <div class="epic-lbl"><span class="pill blue">Epic A</span> Set up an interview — Recruiter</div>
   <div class="story-grid">
     <div class="story"><span class="id">US-1</span><div class="body"><div class="txt">As a <b>recruiter</b>, I want to <b>create an interview room for a role</b>, so that I can invite a candidate to a live session.</div><div class="meta"><span class="pill red">Must</span><a class="goto" href="/demo/dashboard.html">Dashboard →</a></div></div></div>
     <div class="story"><span class="id">US-2</span><div class="body"><div class="txt">As a <b>recruiter</b>, I want to <b>add a fixed list of questions</b>, so that every candidate for the role is asked the same things.</div><div class="meta"><span class="pill red">Must</span><a class="goto" href="/demo/room.html">Live room →</a></div></div></div>
     <div class="story"><span class="id">US-3</span><div class="body"><div class="txt">As a <b>recruiter</b>, I want to <b>send the candidate a join link</b>, so that they can enter without installing anything.</div><div class="meta"><span class="pill red">Must</span><a class="goto" href="/demo/candidate-invite.html">Invite →</a></div></div></div>
+    <div class="story"><span class="id">US-14</span><div class="body"><div class="txt">As a <b>recruiter</b>, I want <b>AI to suggest role-specific questions</b> for the plan, so that I can build a fair, thorough interview faster.</div><div class="meta"><span class="pill yellow">Should</span><span class="pill purple">AI</span><a class="goto" href="/demo/room.html">Live room →</a></div></div></div>
   </div>
 
   <div class="epic-lbl"><span class="pill blue">Epic B</span> Run the live interview — Interviewer</div>
@@ -132,6 +133,9 @@
     <div class="story"><span class="id">US-4</span><div class="body"><div class="txt">As an <b>interviewer</b>, I want to <b>talk to the candidate over live video</b>, so that I can assess them in real time.</div><div class="meta"><span class="pill red">Must</span><a class="goto" href="/demo/room.html">Live room →</a></div></div></div>
     <div class="story"><span class="id">US-5</span><div class="body"><div class="txt">As an <b>interviewer</b>, I want to <b>follow and check off the question plan</b>, so that I stay on track and cover everything.</div><div class="meta"><span class="pill yellow">Should</span><a class="goto" href="/demo/room.html">Live room →</a></div></div></div>
     <div class="story"><span class="id">US-6</span><div class="body"><div class="txt">As an <b>interviewer</b>, I want to <b>see integrity signals as they happen</b>, so that I can trust what I'm seeing.</div><div class="meta"><span class="pill red">Must</span><a class="goto" href="/demo/room.html">Live room →</a></div></div></div>
+    <div class="story"><span class="id">US-15</span><div class="body"><div class="txt">As an <b>interviewer</b>, I want to <b>invite co-interviewers into the same room</b> as a panel, so that we can assess the candidate together live.</div><div class="meta"><span class="pill red">Must</span><a class="goto" href="/demo/room.html">Live room →</a></div></div></div>
+    <div class="story"><span class="id">US-16</span><div class="body"><div class="txt">As an <b>interviewer and candidate</b>, we want a <b>shared live code editor</b> in the room, so that we can write and run code together in real time.</div><div class="meta"><span class="pill red">Must</span><a class="goto" href="/demo/room.html">Live room →</a></div></div></div>
+    <div class="story"><span class="id">US-17</span><div class="body"><div class="txt">As an <b>interviewer and candidate</b>, we want a <b>shared whiteboard</b> in the room, so that we can sketch system designs and diagrams together.</div><div class="meta"><span class="pill yellow">Should</span><a class="goto" href="/demo/room.html">Live room →</a></div></div></div>
   </div>
 
   <div class="epic-lbl"><span class="pill green">Epic C</span> Join as a candidate — Candidate</div>
@@ -146,6 +150,7 @@
     <div class="story"><span class="id">US-10</span><div class="body"><div class="txt">As an <b>interviewer</b>, I want to <b>score the candidate against fixed criteria</b>, so that decisions are consistent and comparable.</div><div class="meta"><span class="pill red">Must</span><a class="goto" href="/demo/review.html">Review →</a></div></div></div>
     <div class="story"><span class="id">US-11</span><div class="body"><div class="txt">As an <b>interviewer</b>, I want to <b>replay the recording and jump to flagged moments</b>, so that I can judge them in context.</div><div class="meta"><span class="pill yellow">Should</span><a class="goto" href="/demo/review.html">Review →</a></div></div></div>
     <div class="story"><span class="id">US-12</span><div class="body"><div class="txt">As a <b>hiring panel</b>, I want to <b>record a hire / no-hire decision</b>, so that we close the loop on the candidate.</div><div class="meta"><span class="pill red">Must</span><a class="goto" href="/demo/review.html">Review →</a></div></div></div>
+    <div class="story"><span class="id">US-18</span><div class="body"><div class="txt">As an <b>interviewer</b>, I want <b>AI-assisted draft scores and a transcript summary</b> after the call, so that scoring is faster — with the human making the final call.</div><div class="meta"><span class="pill yellow">Should</span><span class="pill purple">AI</span><a class="goto" href="/demo/review.html">Review →</a></div></div></div>
   </div>
 
   <div class="epic-lbl"><span class="pill blue">Epic E</span> See the pipeline — Recruiter</div>
@@ -166,7 +171,7 @@
     <div class="nfr"><div class="top"><div class="ic" style="background:var(--tint-blue);color:var(--blue)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-3-6.7L21 8"/><path d="M21 3v5h-5"/></svg></div><div><div class="id">NFR-6</div><h4>Reliability</h4></div></div><p>99.9% uptime target; auto-reconnect on brief drops; recording survives a refresh.</p></div>
     <div class="nfr"><div class="top"><div class="ic" style="background:var(--tint-green);color:var(--green)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="14" rx="2"/><path d="M8 22h8M12 18v4"/></svg></div><div><div class="id">NFR-7</div><h4>Compatibility</h4></div></div><p>Works on current Chrome, Edge, Safari, Firefox — desktop and tablet, no plugins.</p></div>
     <div class="nfr"><div class="top"><div class="ic" style="background:var(--tint-purple);color:var(--purple)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="m7 14 4-4 3 3 5-6"/></svg></div><div><div class="id">NFR-8</div><h4>Scalability</h4></div></div><p>Handles many concurrent interview rooms without quality loss.</p></div>
-    <div class="nfr"><div class="top"><div class="ic" style="background:var(--tint-blue);color:var(--blue)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18M3 7.5 12 3l9 4.5M3 7.5 12 12l9-4.5M3 16.5 12 21l9-4.5"/></svg></div><div><div class="id">NFR-9</div><h4>Fairness &amp; integrity</h4></div></div><p>Same questions and criteria per role; integrity flags are signals, never automatic verdicts.</p></div>
+    <div class="nfr"><div class="top"><div class="ic" style="background:var(--tint-blue);color:var(--blue)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18M3 7.5 12 3l9 4.5M3 7.5 12 12l9-4.5M3 16.5 12 21l9-4.5"/></svg></div><div><div class="id">NFR-9</div><h4>Fairness &amp; integrity</h4></div></div><p>Same questions and criteria per role; integrity flags and AI draft scores are signals/suggestions, never automatic verdicts — a human always decides.</p></div>
     <div class="nfr"><div class="top"><div class="ic" style="background:var(--tint-yellow);color:#a56300"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h4l3 8 4-16 3 8h4"/></svg></div><div><div class="id">NFR-10</div><h4>Observability</h4></div></div><p>A health endpoint and basic logging so uptime and errors can be monitored.</p></div>
   </div>
 </section>
@@ -178,9 +183,11 @@
     <ul>
       <li><span class="chk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span> A recruiter can create a room, add questions, and share a link.</li>
       <li><span class="chk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span> A candidate can join in a browser, pass a device check, and consent.</li>
-      <li><span class="chk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span> Interviewer and candidate can see and hear each other live.</li>
+      <li><span class="chk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span> Interviewer(s) and candidate can see and hear each other live, with a panel able to join the same room.</li>
+      <li><span class="chk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span> The room has a working shared code editor and a shared whiteboard.</li>
+      <li><span class="chk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span> AI can suggest questions when building the plan.</li>
       <li><span class="chk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span> Integrity signals appear during the call.</li>
-      <li><span class="chk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span> The interview is recorded and can be scored on fixed criteria.</li>
+      <li><span class="chk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span> The interview is recorded and can be scored on fixed criteria, with AI draft scores as a starting point.</li>
       <li><span class="chk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span> A hire / no-hire decision is captured.</li>
     </ul>
     <div style="margin-top:20px;display:flex;gap:10px;flex-wrap:wrap">

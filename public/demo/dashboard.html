@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>NextRound — Recruiter dashboard (demo)</title>
+<meta name="description" content="Demo recruiter dashboard with sample interview pipeline, integrity flags, and hiring stats." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Roboto:wght@400;500;700&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="/assets/app.css" />
+<style>
+  .demo-banner{background:var(--tint-yellow); color:#8a5a00; text-align:center; font-size:12.5px; font-weight:500; padding:6px;}
+  .toolbar{display:flex; align-items:center; gap:10px; margin:18px 0; flex-wrap:wrap;}
+  .search{display:flex; align-items:center; gap:8px; border:1px solid var(--line); border-radius:var(--r-pill); height:40px; padding:0 14px; background:#fff; min-width:260px;}
+  .search svg{width:18px; height:18px; color:var(--grey-2);}
+  .search input{border:none; outline:none; font-size:14px; width:100%; background:transparent;}
+  .tab{padding:8px 14px; border-radius:var(--r-pill); font-size:14px; font-weight:500; color:var(--grey); cursor:pointer;}
+  .tab.on{background:var(--tint-blue); color:var(--blue-press);}
+</style>
+</head>
+<body>
+<div class="demo-banner">Demo environment · all names, roles and scores below are fictional sample data.</div>
+<header class="topbar">
+  <div class="wrap nav">
+    <a class="brand" href="/"><svg class="logo-mark" viewBox="0 0 40 40" fill="none"><rect x="2" y="8" width="26" height="24" rx="6" fill="#1a73e8"/><path d="M30 16.5 L37 12 V28 L30 23.5 Z" fill="#34a853"/><circle cx="12" cy="15.5" r="2.4" fill="#fbbc04"/><rect x="8" y="21" width="12" height="3.4" rx="1.7" fill="#fff" opacity=".9"/><circle cx="24.5" cy="27" r="2.2" fill="#ea4335"/></svg> NextRound</a>
+    <nav class="nav-links">
+      <a href="/demo/">Demo</a>
+      <a href="/demo/dashboard.html" class="active">Dashboard</a>
+      <a href="/demo/room.html">Live room</a>
+      <a href="/demo/review.html">Review</a>
+    </nav>
+    <div class="nav-right">
+      <span class="clock" id="clock"></span>
+      <a class="btn btn-primary btn-sm" href="/demo/room.html"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17 10.5V7a1 1 0 0 0-1-1H4a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-3.5l4 4v-11l-4 4Z"/></svg> New interview</a>
+      <span class="avatar hide-sm" style="width:36px;height:36px;font-size:13px;background:var(--purple)">DM</span>
+    </div>
+  </div>
+</header>
+
+<main>
+<section class="wrap page-head">
+  <div class="kicker"><span class="pill blue"><i style="background:#1a73e8"></i> Hiring team</span> Acme Corp · Engineering</div>
+  <h1>Good afternoon, Dana</h1>
+  <p class="sub">You have <b>3 interviews today</b> and <b>2 candidates</b> waiting on a decision.</p>
+</section>
+
+<section class="wrap section">
+  <div class="grid g-4">
+    <div class="stat"><div class="num">18</div><div class="lbl">Interviews this week</div><div class="trend up">▲ 12% vs last week</div></div>
+    <div class="stat"><div class="num">6.2<span style="font-size:16px;color:var(--grey)"> days</span></div><div class="lbl">Avg. time-to-hire</div><div class="trend up">▼ 1.8 days faster</div></div>
+    <div class="stat"><div class="num">4</div><div class="lbl">Integrity flags to review</div><div class="trend down">2 high severity</div></div>
+    <div class="stat"><div class="num">92%</div><div class="lbl">Candidate satisfaction</div><div class="trend up">▲ 4 pts</div></div>
+  </div>
+</section>
+
+<section class="wrap section">
+  <div class="toolbar">
+    <div class="search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3" stroke-linecap="round"/></svg><input placeholder="Search candidates, roles, interviewers…" /></div>
+    <span class="tab on">All</span><span class="tab">Today</span><span class="tab">Awaiting decision</span><span class="tab">Flagged</span>
+    <a class="btn btn-outline btn-sm" style="margin-left:auto" href="#">Export to ATS</a>
+  </div>
+
+  <div class="table-card">
+    <table class="tbl">
+      <thead>
+        <tr><th>Candidate</th><th>Role</th><th class="hide-sm">Interviewer</th><th class="hide-sm">When</th><th>Integrity</th><th>Status</th><th></th></tr>
+      </thead>
+      <tbody>
+        <tr class="row">
+          <td><div class="who"><span class="avatar" style="background:#5b8def">AK</span><div><div class="name">Aida Karimova</div><div class="role">6 yrs · Backend</div></div></div></td>
+          <td>Senior Backend Engineer</td>
+          <td class="hide-sm">You</td>
+          <td class="hide-sm mono">Today · 2:30 PM</td>
+          <td><span class="pill red"><i style="background:#ea4335"></i> 2 flags</span></td>
+          <td><span class="pill blue">Live now</span></td>
+          <td><a class="btn btn-primary btn-sm" href="/demo/room.html">Join</a></td>
+        </tr>
+        <tr class="row">
+          <td><div class="who"><span class="avatar" style="background:#34a853">JT</span><div><div class="name">Jomart Tuleyev</div><div class="role">4 yrs · Full-stack</div></div></div></td>
+          <td>Full-stack Engineer</td>
+          <td class="hide-sm">R. Chen</td>
+          <td class="hide-sm mono">Today · 4:00 PM</td>
+          <td><span class="pill grey">—</span></td>
+          <td><span class="pill yellow"><i style="background:#fbbc04"></i> Scheduled</span></td>
+          <td><a class="btn btn-outline btn-sm" href="/demo/room.html">Open</a></td>
+        </tr>
+        <tr class="row">
+          <td><div class="who"><span class="avatar" style="background:#a142f4">SN</span><div><div class="name">Saule Nurlan</div><div class="role">8 yrs · Platform</div></div></div></td>
+          <td>Staff Platform Engineer</td>
+          <td class="hide-sm">You</td>
+          <td class="hide-sm mono">Yesterday</td>
+          <td><span class="pill green"><i style="background:#34a853"></i> Clean</span></td>
+          <td><span class="pill purple">Awaiting decision</span></td>
+          <td><a class="btn btn-outline btn-sm" href="/demo/review.html">Review</a></td>
+        </tr>
+        <tr class="row">
+          <td><div class="who"><span class="avatar" style="background:#ea8600">MB</span><div><div class="name">Marat Bekov</div><div class="role">5 yrs · Backend</div></div></div></td>
+          <td>Senior Backend Engineer</td>
+          <td class="hide-sm">R. Chen</td>
+          <td class="hide-sm mono">Mon · Jun 29</td>
+          <td><span class="pill red"><i style="background:#ea4335"></i> 3 flags</span></td>
+          <td><span class="pill purple">Awaiting decision</span></td>
+          <td><a class="btn btn-outline btn-sm" href="/demo/review.html">Review</a></td>
+        </tr>
+        <tr class="row">
+          <td><div class="who"><span class="avatar" style="background:#12a4a4">EO</span><div><div class="name">Elena Orlova</div><div class="role">7 yrs · Backend</div></div></div></td>
+          <td>Senior Backend Engineer</td>
+          <td class="hide-sm">You</td>
+          <td class="hide-sm mono">Mon · Jun 29</td>
+          <td><span class="pill green"><i style="background:#34a853"></i> Clean</span></td>
+          <td><span class="pill green"><i style="background:#34a853"></i> Advanced</span></td>
+          <td><a class="btn btn-outline btn-sm" href="/demo/review.html">Review</a></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <p style="color:var(--grey-2);font-size:13px;margin-top:14px">Showing 5 of 42 candidates · <a href="/journey/b2b.html" style="color:var(--blue);font-weight:500">See the full hiring-team journey →</a></p>
+</section>
+</main>
+
+<footer class="foot">
+  <div class="wrap foot-row">
+    <a class="brand" href="/"><svg class="logo-mark" viewBox="0 0 40 40" fill="none"><rect x="2" y="8" width="26" height="24" rx="6" fill="#1a73e8"/><path d="M30 16.5 L37 12 V28 L30 23.5 Z" fill="#34a853"/><circle cx="12" cy="15.5" r="2.4" fill="#fbbc04"/><rect x="8" y="21" width="12" height="3.4" rx="1.7" fill="#fff" opacity=".9"/><circle cx="24.5" cy="27" r="2.2" fill="#ea4335"/></svg> NextRound</a>
+    <span>Recruiter dashboard · dummy data.</span>
+    <span class="spacer"><a href="/demo/">← Back to demo hub</a></span>
+  </div>
+</footer>
+<script>
+  const clock=document.getElementById('clock');
+  function tick(){const d=new Date();clock.textContent=d.toLocaleTimeString([],{hour:'numeric',minute:'2-digit'})+' · '+d.toLocaleDateString([],{weekday:'short',month:'short',day:'numeric'});}
+  tick();setInterval(tick,10000);
+  document.querySelectorAll('.tab').forEach(t=>t.addEventListener('click',()=>{document.querySelectorAll('.tab').forEach(x=>x.classList.remove('on'));t.classList.add('on');}));
+</script>
+</body>
+</html>

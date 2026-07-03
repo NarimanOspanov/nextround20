@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>NextRound — Review &amp; scorecard (demo)</title>
+<meta name="description" content="Demo of the NextRound review screen: recording with flagged moments, a criteria-based scorecard, and the hire decision." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Roboto:wght@400;500;700&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="/assets/app.css" />
+<style>
+  .rev-grid{display:grid; grid-template-columns:1.15fr 1fr; gap:22px; align-items:start;}
+  @media (max-width:900px){ .rev-grid{grid-template-columns:1fr;} }
+  .rec-card{background:#202124; border-radius:14px; overflow:hidden; box-shadow:var(--elev-2);}
+  .rec-thumb{aspect-ratio:16/9; background:linear-gradient(150deg,#3c4043,#26282b); position:relative; display:flex; align-items:center; justify-content:center;}
+  .play{width:60px; height:60px; border-radius:50%; background:rgba(255,255,255,.92); display:flex; align-items:center; justify-content:center; box-shadow:var(--elev-1); cursor:pointer;}
+  .play svg{width:26px; height:26px; color:var(--ink); margin-left:3px;}
+  .rec-name{position:absolute; left:14px; top:14px; color:#e8eaed; font-size:13px; background:rgba(0,0,0,.4); padding:4px 10px; border-radius:6px;}
+  .scrub{position:relative; height:44px; background:#26282b; padding:0 14px; display:flex; align-items:center;}
+  .track{position:relative; flex:1; height:5px; background:rgba(255,255,255,.2); border-radius:3px;}
+  .track .played{position:absolute; left:0; top:0; height:100%; width:46%; background:var(--red); border-radius:3px;}
+  .mark{position:absolute; top:-4px; width:12px; height:12px; border-radius:50%; border:2px solid #202124; cursor:pointer;}
+  .mark.flag{background:var(--red);} .mark.info{background:var(--yellow);}
+  .flag-row{display:flex; align-items:center; gap:11px; padding:11px 0; border-top:1px solid var(--bg-soft-2); font-size:13.5px;}
+  .flag-row:first-of-type{border-top:none;}
+  .flag-row .fico{width:30px;height:30px;border-radius:8px;flex:none;display:flex;align-items:center;justify-content:center;}
+  .flag-row.flag .fico{background:#fde3e1;color:var(--red);} .flag-row.info .fico{background:var(--tint-yellow);color:#a56300;} .flag-row.ok .fico{background:var(--tint-green);color:var(--green);}
+  .flag-row .fico svg{width:16px;height:16px;}
+  .flag-row .ft{margin-left:auto;font-family:"Roboto Mono";font-size:12px;color:var(--blue);cursor:pointer;}
+  .verdict{display:flex; gap:10px; margin-top:16px;}
+  .verdict button{flex:1; height:46px; border-radius:var(--r-sm); border:1px solid var(--line); background:#fff; font-family:"Roboto"; font-weight:500; font-size:14px; cursor:pointer; transition:.15s; display:flex;align-items:center;justify-content:center;gap:8px;}
+  .verdict button:hover{border-color:#c7ccd1; background:var(--bg-soft);}
+  .verdict button.yes.sel{background:var(--tint-green); border-color:var(--green); color:#137333;}
+  .verdict button.no.sel{background:var(--tint-red); border-color:var(--red); color:#c5221f;}
+  .verdict button.maybe.sel{background:var(--tint-yellow); border-color:var(--yellow); color:#a56300;}
+  .panelist{display:flex; align-items:center; gap:10px; padding:9px 0; border-top:1px solid var(--bg-soft-2); font-size:13.5px;}
+  .panelist:first-of-type{border-top:none;}
+</style>
+</head>
+<body>
+<header class="topbar">
+  <div class="wrap nav">
+    <a class="brand" href="/"><svg class="logo-mark" viewBox="0 0 40 40" fill="none"><rect x="2" y="8" width="26" height="24" rx="6" fill="#1a73e8"/><path d="M30 16.5 L37 12 V28 L30 23.5 Z" fill="#34a853"/><circle cx="12" cy="15.5" r="2.4" fill="#fbbc04"/><rect x="8" y="21" width="12" height="3.4" rx="1.7" fill="#fff" opacity=".9"/><circle cx="24.5" cy="27" r="2.2" fill="#ea4335"/></svg> NextRound</a>
+    <nav class="nav-links">
+      <a href="/demo/">Demo</a>
+      <a href="/demo/dashboard.html">Dashboard</a>
+      <a href="/demo/room.html">Live room</a>
+      <a href="/demo/review.html" class="active">Review</a>
+    </nav>
+    <div class="nav-right"><span class="clock" id="clock"></span></div>
+  </div>
+</header>
+
+<main>
+<section class="wrap page-head" style="padding-bottom:0">
+  <div class="crumbs"><a href="/demo/dashboard.html">Dashboard</a><span class="sep">/</span><span>Review</span></div>
+  <div style="display:flex;align-items:center;gap:14px;margin-top:14px;flex-wrap:wrap">
+    <span class="avatar" style="width:52px;height:52px;font-size:18px;background:#5b8def">AK</span>
+    <div>
+      <h1 style="font-size:26px">Aida Karimova</h1>
+      <p style="color:var(--grey);font-size:14.5px">Senior Backend Engineer · Interviewed by Dana Morales · 48 min</p>
+    </div>
+    <span class="pill green" style="margin-left:auto"><i style="background:#34a853"></i> Overall 4.2 / 5</span>
+    <span class="pill red"><i style="background:#ea4335"></i> 2 integrity flags</span>
+  </div>
+</section>
+
+<section class="wrap section">
+  <div class="rev-grid">
+    <!-- left: recording + flags -->
+    <div class="card pad">
+      <h4 style="font-family:'Poppins';font-size:15px;margin-bottom:14px">Recording</h4>
+      <div class="rec-card">
+        <div class="rec-thumb">
+          <span class="rec-name">Aida K. · Senior Backend Engineer</span>
+          <div class="play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></div>
+        </div>
+        <div class="scrub">
+          <div class="track">
+            <div class="played"></div>
+            <div class="mark info" style="left:22%" title="Screen share started"></div>
+            <div class="mark flag" style="left:46%" title="Paste detected"></div>
+            <div class="mark flag" style="left:63%" title="Tab switch"></div>
+          </div>
+        </div>
+      </div>
+
+      <h4 style="font-family:'Poppins';font-size:15px;margin:20px 0 6px">Timeline &amp; integrity flags</h4>
+      <div class="flag-row info"><div class="fico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 5h16v11H4z"/><path d="M9 20h6M12 16v4"/></svg></div><div><b>Screen share started</b><div style="color:var(--grey-2);font-size:12px">Coding question — rate limiter</div></div><span class="ft">10:42</span></div>
+      <div class="flag-row flag"><div class="fico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 9v4M12 17h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/></svg></div><div><b>Paste detected — 42 chars</b><div style="color:var(--grey-2);font-size:12px">Reviewed: candidate explained the snippet live</div></div><span class="ft">22:15</span></div>
+      <div class="flag-row flag"><div class="fico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 9v4M12 17h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/></svg></div><div><b>Tab switch — 6 seconds</b><div style="color:var(--grey-2);font-size:12px">Checked documentation, disclosed it</div></div><span class="ft">31:08</span></div>
+      <div class="flag-row ok"><div class="fico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div><div><b>No second person or off-screen prompts detected</b><div style="color:var(--grey-2);font-size:12px">Full session</div></div><span class="ft">48:00</span></div>
+      <p style="color:var(--grey-2);font-size:12.5px;margin-top:12px">Flags are signals, not verdicts — every flag links back to the exact moment so you can judge in context.</p>
+    </div>
+
+    <!-- right: scorecard + decision -->
+    <div style="display:flex;flex-direction:column;gap:18px">
+      <div class="card pad">
+        <h4 style="font-family:'Poppins';font-size:15px;margin-bottom:6px">Scorecard</h4>
+        <p style="color:var(--grey-2);font-size:12.5px;margin-bottom:8px">Same criteria for every candidate on this role.</p>
+        <div class="score-row"><div class="sname"><b>Problem solving</b><span>Approach &amp; rigor</span></div><div class="bar"><i class="g" style="width:88%"></i></div><div class="sval">4.4</div></div>
+        <div class="score-row"><div class="sname"><b>Coding &amp; correctness</b><span>Rate limiter task</span></div><div class="bar"><i class="g" style="width:84%"></i></div><div class="sval">4.2</div></div>
+        <div class="score-row"><div class="sname"><b>System design</b><span>Scaling trade-offs</span></div><div class="bar"><i class="y" style="width:72%"></i></div><div class="sval">3.6</div></div>
+        <div class="score-row"><div class="sname"><b>Communication</b><span>Clarity &amp; structure</span></div><div class="bar"><i class="g" style="width:92%"></i></div><div class="sval">4.6</div></div>
+        <div class="score-row"><div class="sname"><b>Culture add</b><span>Collaboration</span></div><div class="bar"><i class="g" style="width:80%"></i></div><div class="sval">4.0</div></div>
+      </div>
+
+      <div class="card pad">
+        <h4 style="font-family:'Poppins';font-size:15px">Interviewer notes</h4>
+        <p style="color:var(--grey);font-size:13.5px;margin-top:8px;line-height:1.55">Strong fundamentals and very clear communicator. Rate limiter solution was clean; scaling discussion needed prompting on cache invalidation. Both integrity flags were minor and openly disclosed — no concern. Would pair well with the platform team.</p>
+      </div>
+
+      <div class="card pad">
+        <h4 style="font-family:'Poppins';font-size:15px">Your decision</h4>
+        <div class="verdict">
+          <button class="no" data-v="no">No hire</button>
+          <button class="maybe" data-v="maybe">Lean yes</button>
+          <button class="yes sel" data-v="yes"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Advance</button>
+        </div>
+        <h4 style="font-family:'Poppins';font-size:13px;margin:18px 0 4px;color:var(--grey)">Panel so far</h4>
+        <div class="panelist"><span class="avatar" style="width:28px;height:28px;font-size:11px;background:var(--purple)">DM</span> Dana Morales <span class="pill green" style="margin-left:auto"><i style="background:#34a853"></i> Advance</span></div>
+        <div class="panelist"><span class="avatar" style="width:28px;height:28px;font-size:11px;background:#12a4a4">RC</span> Rex Chen <span class="pill green" style="margin-left:auto"><i style="background:#34a853"></i> Advance</span></div>
+        <div class="panelist"><span class="avatar" style="width:28px;height:28px;font-size:11px;background:#ea8600">LP</span> Lena Park <span class="pill yellow" style="margin-left:auto"><i style="background:#fbbc04"></i> Pending</span></div>
+        <a class="btn btn-primary" href="/demo/dashboard.html" style="width:100%;margin-top:16px">Submit &amp; return to pipeline</a>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="foot">
+  <div class="wrap foot-row">
+    <a class="brand" href="/"><svg class="logo-mark" viewBox="0 0 40 40" fill="none"><rect x="2" y="8" width="26" height="24" rx="6" fill="#1a73e8"/><path d="M30 16.5 L37 12 V28 L30 23.5 Z" fill="#34a853"/><circle cx="12" cy="15.5" r="2.4" fill="#fbbc04"/><rect x="8" y="21" width="12" height="3.4" rx="1.7" fill="#fff" opacity=".9"/><circle cx="24.5" cy="27" r="2.2" fill="#ea4335"/></svg> NextRound</a>
+    <span>Review &amp; scorecard · dummy data.</span>
+    <span class="spacer"><a href="/journey/b2b.html">See the B2B journey →</a></span>
+  </div>
+</footer>
+<script>
+  const clock=document.getElementById('clock');
+  function tick(){const d=new Date();clock.textContent=d.toLocaleTimeString([],{hour:'numeric',minute:'2-digit'})+' · '+d.toLocaleDateString([],{weekday:'short',month:'short',day:'numeric'});}
+  tick();setInterval(tick,10000);
+  document.querySelectorAll('.verdict button').forEach(b=>b.addEventListener('click',()=>{
+    document.querySelectorAll('.verdict button').forEach(x=>x.classList.remove('sel'));
+    b.classList.add('sel');
+  }));
+</script>
+</body>
+</html>

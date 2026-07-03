@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>NextRound — Candidate customer journey map</title>
+<meta name="description" content="Customer journey map for candidates interviewing through NextRound: from receiving the invite to getting a result, with the emotional arc at each stage." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Roboto:wght@400;500;700&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="/assets/app.css" />
+<style>
+  .cjm-grid{grid-template-columns:160px repeat(6,minmax(158px,1fr));}
+  .persona{display:flex; align-items:center; gap:16px; background:#fff; border:1px solid var(--line); border-radius:var(--r-md); padding:18px 20px; box-shadow:var(--elev-1);}
+  .persona .avatar{width:56px; height:56px; font-size:20px; background:var(--green);}
+  .persona .p-meta{font-size:13.5px; color:var(--grey);}
+  .persona .p-meta b{color:var(--ink); font-weight:600; display:block; font-family:"Poppins"; font-size:16px;}
+  .persona .p-tags{margin-left:auto; display:flex; gap:8px; flex-wrap:wrap;}
+  .fullspan{grid-column:2 / -1; padding:0;}
+</style>
+</head>
+<body>
+<header class="topbar">
+  <div class="wrap nav">
+    <a class="brand" href="/">
+      <svg class="logo-mark" viewBox="0 0 40 40" fill="none" aria-hidden="true">
+        <rect x="2" y="8" width="26" height="24" rx="6" fill="#1a73e8"/><path d="M30 16.5 L37 12 V28 L30 23.5 Z" fill="#34a853"/>
+        <circle cx="12" cy="15.5" r="2.4" fill="#fbbc04"/><rect x="8" y="21" width="12" height="3.4" rx="1.7" fill="#ffffff" opacity=".9"/><circle cx="24.5" cy="27" r="2.2" fill="#ea4335"/>
+      </svg> NextRound
+    </a>
+    <nav class="nav-links">
+      <a href="/">Home</a>
+      <a href="/demo/">Demo</a>
+      <a href="/journey/b2b.html">B2B journey</a>
+      <a href="/journey/candidate.html" class="active">Candidate journey</a>
+    </nav>
+    <div class="nav-right">
+      <span class="clock" id="clock"></span>
+      <a class="btn btn-outline btn-sm" href="/journey/b2b.html">← B2B journey</a>
+    </div>
+  </div>
+</header>
+
+<main>
+<section class="wrap page-head">
+  <div class="crumbs"><a href="/demo/">Demo</a><span class="sep">/</span><span>Candidate journey map</span></div>
+  <div class="kicker" style="margin-top:12px"><span class="pill green"><i style="background:#34a853"></i> Candidate</span></div>
+  <h1>Customer journey map — the candidate</h1>
+  <p class="sub">The emotional arc of a candidate interviewing for the “Senior Backend Engineer” role — where nerves peak, where NextRound reduces friction, and where trust is won or lost.</p>
+</section>
+
+<section class="wrap section">
+  <div class="persona">
+    <div class="avatar">AK</div>
+    <div class="p-meta">
+      <b>Aida Karimova · Backend Engineer, 6 yrs</b>
+      Interviewing at 3 companies at once · limited time, wants a fair shot and a fast answer.
+    </div>
+    <div class="p-tags">
+      <span class="pill grey">Goal: show real skill</span>
+      <span class="pill red">Fear: tech glitches &amp; surveillance</span>
+      <span class="pill green">Wants: respect &amp; a quick result</span>
+    </div>
+  </div>
+</section>
+
+<section class="wrap section">
+  <div class="cjm">
+    <div class="cjm-scroll">
+      <div class="cjm-grid">
+        <!-- Stage header row -->
+        <div class="cjm-rowlabel" style="background:#fff; border-top:none;"></div>
+        <div class="cjm-stage" style="background:#1a73e8; border-top:none;"><div class="step">STAGE 01</div><h3>Invited</h3><div class="goal">Get a clear invite and know what to expect.</div></div>
+        <div class="cjm-stage" style="background:#1967d2; border-top:none;"><div class="step">STAGE 02</div><h3>Prep</h3><div class="goal">Check tech &amp; settle nerves before the call.</div></div>
+        <div class="cjm-stage" style="background:#a56300; border-top:none;"><div class="step">STAGE 03</div><h3>Join</h3><div class="goal">Get into the room without a hitch.</div></div>
+        <div class="cjm-stage" style="background:#185abc; border-top:none;"><div class="step">STAGE 04</div><h3>Interview</h3><div class="goal">Do my best work and be understood.</div></div>
+        <div class="cjm-stage" style="background:#34a853; border-top:none;"><div class="step">STAGE 05</div><h3>Wrap up</h3><div class="goal">Leave feeling it was fair.</div></div>
+        <div class="cjm-stage" style="background:#137333; border-top:none;"><div class="step">STAGE 06</div><h3>Result</h3><div class="goal">Hear back quickly, either way.</div></div>
+
+        <!-- Actions -->
+        <div class="cjm-rowlabel"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 3 14h7l-1 8 10-12h-7l1-8Z"/></svg> Actions</div>
+        <div class="cjm-cell"><ul class="cjm-list"><li>Opens email invite</li><li>Reads role &amp; format</li><li>Picks a time slot</li></ul></div>
+        <div class="cjm-cell"><ul class="cjm-list"><li>Clicks link early</li><li>Runs camera/mic check</li><li>Tests connection</li></ul></div>
+        <div class="cjm-cell"><ul class="cjm-list"><li>Enters name</li><li>Reviews consent notice</li><li>Joins the room</li></ul></div>
+        <div class="cjm-cell"><ul class="cjm-list"><li>Answers questions</li><li>Shares screen / codes</li><li>Asks questions back</li></ul></div>
+        <div class="cjm-cell"><ul class="cjm-list"><li>Says goodbye</li><li>Gets “what’s next” note</li></ul></div>
+        <div class="cjm-cell"><ul class="cjm-list"><li>Receives decision email</li><li>Optionally, feedback</li></ul></div>
+
+        <!-- Touchpoints -->
+        <div class="cjm-rowlabel"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/></svg> Touchpoints</div>
+        <div class="cjm-cell"><div class="touch"><span class="pill blue">Invite email</span><span class="pill grey">Slot picker</span></div></div>
+        <div class="cjm-cell"><div class="touch"><span class="pill blue">Device check</span><span class="pill grey">Help tips</span></div></div>
+        <div class="cjm-cell"><div class="touch"><span class="pill yellow">Consent screen</span><span class="pill red">Lobby</span></div></div>
+        <div class="cjm-cell"><div class="touch"><span class="pill red">Interview room</span><span class="pill grey">Screen share</span></div></div>
+        <div class="cjm-cell"><div class="touch"><span class="pill green">Thank-you screen</span></div></div>
+        <div class="cjm-cell"><div class="touch"><span class="pill green">Result email</span><span class="pill grey">Feedback</span></div></div>
+
+        <!-- Emotion faces -->
+        <div class="cjm-rowlabel"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2" stroke-linecap="round"/><path d="M9 9h.01M15 9h.01" stroke-linecap="round"/></svg> Emotion</div>
+        <div class="cjm-cell"><div class="emo"><div class="face">🙂</div><div class="mood">Hopeful</div></div></div>
+        <div class="cjm-cell"><div class="emo"><div class="face">😬</div><div class="mood">Nervous</div></div></div>
+        <div class="cjm-cell"><div class="emo"><div class="face">😰</div><div class="mood">Peak nerves</div></div></div>
+        <div class="cjm-cell"><div class="emo"><div class="face">😌</div><div class="mood">Settling in</div></div></div>
+        <div class="cjm-cell"><div class="emo"><div class="face">😊</div><div class="mood">Relieved</div></div></div>
+        <div class="cjm-cell"><div class="emo"><div class="face">🤞</div><div class="mood">Hopeful, waiting</div></div></div>
+
+        <!-- Emotion curve -->
+        <div class="cjm-rowlabel">Experience curve</div>
+        <div class="fullspan cjm-emocurve">
+          <svg viewBox="0 0 600 120" preserveAspectRatio="none" aria-hidden="true">
+            <line x1="0" y1="30" x2="600" y2="30" stroke="#e6e6e6" stroke-width="1"/>
+            <line x1="0" y1="60" x2="600" y2="60" stroke="#e6e6e6" stroke-width="1"/>
+            <line x1="0" y1="90" x2="600" y2="90" stroke="#e6e6e6" stroke-width="1"/>
+            <polyline points="50,54 150,72 250,78 350,60 450,36 550,48" fill="none" stroke="#34a853" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="50" cy="54" r="7" fill="#fbbc04"/>
+            <circle cx="150" cy="72" r="7" fill="#fbbc04"/>
+            <circle cx="250" cy="78" r="7" fill="#ea4335"/>
+            <circle cx="350" cy="60" r="7" fill="#fbbc04"/>
+            <circle cx="450" cy="36" r="7" fill="#34a853"/>
+            <circle cx="550" cy="48" r="7" fill="#fbbc04"/>
+          </svg>
+        </div>
+
+        <!-- Pain points -->
+        <div class="cjm-rowlabel"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/><path d="M12 9v4M12 17h.01"/></svg> Pain points</div>
+        <div class="cjm-cell"><ul class="cjm-list pain"><li>Vague invites, unclear format</li><li>Yet another take-home</li></ul></div>
+        <div class="cjm-cell"><ul class="cjm-list pain"><li>“Will my mic work?”</li><li>App downloads &amp; logins</li></ul></div>
+        <div class="cjm-cell"><ul class="cjm-list pain"><li>Feeling watched / distrusted</li><li>Unclear what’s recorded</li></ul></div>
+        <div class="cjm-cell"><ul class="cjm-list pain"><li>Freezing under pressure</li><li>Being judged inconsistently</li></ul></div>
+        <div class="cjm-cell"><ul class="cjm-list pain"><li>No idea how it went</li><li>“When will I hear back?”</li></ul></div>
+        <div class="cjm-cell"><ul class="cjm-list pain"><li>Silence / ghosting</li><li>No feedback to grow</li></ul></div>
+
+        <!-- Opportunities / NextRound -->
+        <div class="cjm-rowlabel"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12c.6.6 1 1.4 1 2h6c0-.6.4-1.4 1-2A7 7 0 0 0 12 2Z"/></svg> How NextRound helps</div>
+        <div class="cjm-cell"><ul class="cjm-list opp"><li>Clear invite: role, format, length</li></ul><span class="chip-feat">Branded invite</span></div>
+        <div class="cjm-cell"><ul class="cjm-list opp"><li>Browser-based device check</li></ul><span class="chip-feat">No-install lobby</span></div>
+        <div class="cjm-cell"><ul class="cjm-list opp"><li>Plain-language consent up front</li></ul><span class="chip-feat">Transparent consent</span></div>
+        <div class="cjm-cell"><ul class="cjm-list opp"><li>Same questions for every candidate</li></ul><span class="chip-feat">Structured plan</span></div>
+        <div class="cjm-cell"><ul class="cjm-list opp"><li>Clear “what happens next”</li></ul><span class="chip-feat">Wrap-up screen</span></div>
+        <div class="cjm-cell"><ul class="cjm-list opp"><li>Faster, evidence-based decisions</li></ul><span class="chip-feat">Scorecard speed</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="legend">
+    <span><i style="background:#ea4335"></i> Low / friction</span>
+    <span><i style="background:#fbbc04"></i> Neutral</span>
+    <span><i style="background:#34a853"></i> Positive</span>
+    <span style="margin-left:auto"><a class="btn btn-outline btn-sm" href="/demo/candidate-invite.html">Walk the candidate flow →</a></span>
+  </div>
+</section>
+</main>
+
+<footer class="foot">
+  <div class="wrap foot-row">
+    <a class="brand" href="/"><svg class="logo-mark" viewBox="0 0 40 40" fill="none"><rect x="2" y="8" width="26" height="24" rx="6" fill="#1a73e8"/><path d="M30 16.5 L37 12 V28 L30 23.5 Z" fill="#34a853"/><circle cx="12" cy="15.5" r="2.4" fill="#fbbc04"/><rect x="8" y="21" width="12" height="3.4" rx="1.7" fill="#fff" opacity=".9"/><circle cx="24.5" cy="27" r="2.2" fill="#ea4335"/></svg> NextRound</a>
+    <span>Customer journey map · illustrative dummy data.</span>
+    <span class="spacer">© 2026 NextRound</span>
+  </div>
+</footer>
+<script>
+  const clock=document.getElementById('clock');
+  function tick(){const d=new Date();clock.textContent=d.toLocaleTimeString([],{hour:'numeric',minute:'2-digit'})+' · '+d.toLocaleDateString([],{weekday:'short',month:'short',day:'numeric'});}
+  tick();setInterval(tick,10000);
+</script>
+</body>
+</html>

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>NextRound — Candidate in the room (demo)</title>
+<meta name="description" content="Demo of the candidate's in-interview view: a calm, distraction-free room with transparent, plain-language monitoring." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Roboto:wght@400;500;700&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="/assets/app.css" />
+<style>
+  body{background:#f1f3f4;}
+  .croom-grid{display:grid; grid-template-columns:1fr 320px; gap:18px; align-items:start;}
+  @media (max-width:900px){ .croom-grid{grid-template-columns:1fr;} }
+  .panel-card{background:#fff;border:1px solid var(--line);border-radius:14px;box-shadow:var(--elev-1);padding:16px;}
+  .panel-card h4{font-family:"Poppins";font-size:14px;display:flex;align-items:center;gap:8px;margin-bottom:6px;}
+  .panel-card h4 svg{width:17px;height:17px;color:var(--blue);}
+  .qcard{background:var(--tint-blue);border-radius:10px;padding:14px 16px;}
+  .qcard .qn{font-size:11.5px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--blue);}
+  .qcard .qtext{font-size:15px;font-weight:500;margin-top:6px;font-family:"Poppins";}
+  .mon-row{display:flex;align-items:center;gap:10px;padding:9px 0;border-top:1px solid var(--bg-soft-2);font-size:13px;}
+  .mon-row:first-of-type{border-top:none;}
+  .mon-row .mi{width:26px;height:26px;border-radius:7px;background:var(--tint-green);color:var(--green);display:flex;align-items:center;justify-content:center;flex:none;}
+  .mon-row .mi svg{width:15px;height:15px;}
+  .mon-row .st{margin-left:auto;color:var(--green);font-size:11.5px;font-weight:500;}
+  .tile-int{position:absolute;right:12px;bottom:12px;width:120px;aspect-ratio:16/11;border-radius:9px;background:linear-gradient(150deg,#41474d,#2b2e31);border:1px solid rgba(255,255,255,.08);display:flex;align-items:center;justify-content:center;}
+  .tile-int .avatar{width:44px;height:44px;font-size:16px;background:var(--purple);}
+</style>
+</head>
+<body>
+<header class="topbar">
+  <div class="wrap nav">
+    <a class="brand" href="/"><svg class="logo-mark" viewBox="0 0 40 40" fill="none"><rect x="2" y="8" width="26" height="24" rx="6" fill="#1a73e8"/><path d="M30 16.5 L37 12 V28 L30 23.5 Z" fill="#34a853"/><circle cx="12" cy="15.5" r="2.4" fill="#fbbc04"/><rect x="8" y="21" width="12" height="3.4" rx="1.7" fill="#fff" opacity=".9"/><circle cx="24.5" cy="27" r="2.2" fill="#ea4335"/></svg> NextRound</a>
+    <nav class="nav-links">
+      <a href="/demo/">Demo</a>
+      <a href="/demo/candidate-invite.html">Invite &amp; lobby</a>
+      <a href="/demo/candidate-room.html" class="active">In the room</a>
+    </nav>
+    <div class="nav-right"><span class="clock" id="clock"></span><span class="pill green hide-sm">Candidate view</span></div>
+  </div>
+</header>
+
+<main>
+<section class="wrap page-head" style="padding-bottom:0">
+  <div class="crumbs"><a href="/demo/candidate-invite.html">Lobby</a><span class="sep">/</span><span>In the interview</span></div>
+</section>
+
+<section class="wrap section">
+  <div class="croom-grid">
+    <!-- video -->
+    <div class="room">
+      <div class="room-top">
+        <span class="rec"><i></i> Recording · you consented</span>
+        <span class="meta">Interview with Dana · <span id="elapsed">04:37</span></span>
+      </div>
+      <div class="tiles">
+        <div class="tile-main">
+          <div class="avatar" style="background:#a142f4">DM</div>
+          <span class="tile-name">Dana M. · Interviewer</span>
+          <div class="tile-int"><div class="avatar">AK</div></div>
+        </div>
+      </div>
+      <div class="controls">
+        <div class="ctrl" title="Mute"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 15a3 3 0 0 0 3-3V6a3 3 0 0 0-6 0v6a3 3 0 0 0 3 3Zm5-3a5 5 0 0 1-10 0H5a7 7 0 0 0 6 6.9V21h2v-2.1A7 7 0 0 0 19 12h-2Z"/></svg></div>
+        <div class="ctrl" title="Camera"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17 10.5V7a1 1 0 0 0-1-1H4a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-3.5l4 4v-11l-4 4Z"/></svg></div>
+        <div class="ctrl" title="Share screen"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 5h16v11H4z"/><path d="M9 20h6M12 16v4"/></svg></div>
+        <div class="ctrl" title="Raise hand"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 11V6a2 2 0 0 0-4 0M14 10V4a2 2 0 0 0-4 0v2M10 10.5V6a2 2 0 0 0-4 0v8a6 6 0 0 0 6 6h1a6 6 0 0 0 6-6v-3a2 2 0 0 0-4 0"/></svg></div>
+        <a class="ctrl end" title="Leave" href="/demo/candidate-invite.html"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 9c-1.6 0-3.15.25-4.6.72v3.1c0 .39-.23.74-.56.9-.98.49-1.87 1.12-2.66 1.85a.98.98 0 0 1-1.35-.03L.29 13.08a.99.99 0 0 1 .03-1.4C3.34 8.78 7.46 7 12 7s8.66 1.78 11.68 4.68a.99.99 0 0 1 .03 1.4l-2.58 2.36a.98.98 0 0 1-1.35.03 12.6 12.6 0 0 0-2.66-1.85.998.998 0 0 1-.56-.9v-3.1A15.6 15.6 0 0 0 12 9Z"/></svg></a>
+      </div>
+    </div>
+
+    <!-- side -->
+    <div style="display:flex;flex-direction:column;gap:16px">
+      <div class="panel-card">
+        <h4><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3M21 8V5a2 2 0 0 0-2-2h-3M3 16v3a2 2 0 0 0 2 2h3M16 21h3a2 2 0 0 0 2-2v-3"/></svg> Current question <span class="pill grey" style="margin-left:auto">2 of 5</span></h4>
+        <div class="qcard">
+          <div class="qn">Coding</div>
+          <div class="qtext">Design a rate limiter for an API. Start simple, then we'll scale it together.</div>
+        </div>
+        <p style="color:var(--grey);font-size:12.5px;margin-top:10px">Take your time. You can think out loud, share your screen, and ask clarifying questions.</p>
+      </div>
+
+      <div class="panel-card">
+        <h4><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 2 4 5v6c0 5 3.4 8.5 8 11 4.6-2.5 8-6 8-11V5l-8-3Z"/></svg> What's being checked</h4>
+        <p style="color:var(--grey-2);font-size:12px;margin-bottom:6px">Transparent, so there are no surprises.</p>
+        <div class="mon-row"><div class="mi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div> You're in the interview tab <span class="st">Active</span></div>
+        <div class="mon-row"><div class="mi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div> Only you on camera <span class="st">OK</span></div>
+        <div class="mon-row"><div class="mi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div> Session recording <span class="st">On</span></div>
+        <p style="color:var(--grey-2);font-size:11.5px;margin-top:10px">Pasting code or switching tabs isn't blocked — it's just noted for the interviewer, and you can explain it.</p>
+      </div>
+
+      <div class="panel-card" style="background:var(--tint-green);border-color:#b7e1c3">
+        <div style="display:flex;gap:10px;font-size:13px;color:#137333">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex:none"><path d="M12 8v4l3 2"/><circle cx="12" cy="12" r="9"/></svg>
+          <div>Everyone applying for this role answers the <b>same questions</b>, scored on the <b>same criteria</b>.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="foot">
+  <div class="wrap foot-row">
+    <a class="brand" href="/"><svg class="logo-mark" viewBox="0 0 40 40" fill="none"><rect x="2" y="8" width="26" height="24" rx="6" fill="#1a73e8"/><path d="M30 16.5 L37 12 V28 L30 23.5 Z" fill="#34a853"/><circle cx="12" cy="15.5" r="2.4" fill="#fbbc04"/><rect x="8" y="21" width="12" height="3.4" rx="1.7" fill="#fff" opacity=".9"/><circle cx="24.5" cy="27" r="2.2" fill="#ea4335"/></svg> NextRound</a>
+    <span>Candidate in-room · dummy data.</span>
+    <span class="spacer"><a href="/journey/candidate.html">See the candidate journey →</a></span>
+  </div>
+</footer>
+<script>
+  const clock=document.getElementById('clock');
+  function tick(){const d=new Date();clock.textContent=d.toLocaleTimeString([],{hour:'numeric',minute:'2-digit'})+' · '+d.toLocaleDateString([],{weekday:'short',month:'short',day:'numeric'});}
+  tick();setInterval(tick,10000);
+  // ticking elapsed timer
+  let s=4*60+37; const el=document.getElementById('elapsed');
+  setInterval(()=>{s++;el.textContent=String(Math.floor(s/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0');},1000);
+</script>
+</body>
+</html>

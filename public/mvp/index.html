@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>NextRound — MVP requirements (Minimal Cool Product)</title>
+<meta name="description" content="Functional (user stories) and non-functional requirements for the NextRound Minimal Cool Product, each linked to the screen that fulfills it." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Roboto:wght@400;500;700&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="/assets/app.css" />
+<style>
+  .onesent{background:#fff;border:1px solid var(--line);border-left:4px solid var(--blue);border-radius:var(--r-md);padding:20px 22px;box-shadow:var(--elev-1);}
+  .onesent .lbl{font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:var(--blue);margin-bottom:8px;}
+  .onesent p{font-size:18px;font-family:"Poppins";font-weight:500;line-height:1.4;}
+  .scope{display:grid;grid-template-columns:1fr 1fr;gap:18px;}
+  @media (max-width:900px){.scope{grid-template-columns:1fr;}}
+  .scope .col{background:#fff;border:1px solid var(--line);border-radius:var(--r-md);padding:20px;box-shadow:var(--elev-1);}
+  .scope h3{font-size:15px;display:flex;align-items:center;gap:8px;margin-bottom:12px;}
+  .scope ul{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:9px;}
+  .scope li{display:flex;gap:9px;font-size:14px;color:var(--ink);}
+  .scope li svg{width:17px;height:17px;flex:none;margin-top:2px;}
+  .scope .in li svg{color:var(--green);} .scope .out li svg{color:var(--grey-2);}
+
+  .band{display:flex;align-items:center;gap:12px;margin:36px 0 4px;}
+  .band .bn{width:30px;height:30px;border-radius:9px;background:var(--tint-blue);color:var(--blue);display:flex;align-items:center;justify-content:center;font-family:"Poppins";font-weight:600;flex:none;}
+  .band h2{font-size:22px;} .band .line{flex:1;height:1px;background:var(--line);}
+  .band .cnt{color:var(--grey-2);font-size:13px;}
+
+  .epic-lbl{font-family:"Poppins";font-weight:600;font-size:14px;color:var(--grey);margin:22px 0 12px;display:flex;align-items:center;gap:10px;}
+  .epic-lbl .pill{font-size:11px;}
+
+  .story{display:flex;gap:14px;align-items:flex-start;background:#fff;border:1px solid var(--line);border-radius:var(--r-md);padding:16px 18px;box-shadow:var(--elev-1);transition:.15s;}
+  .story:hover{box-shadow:var(--elev-2);}
+  .story .id{font-family:"Roboto Mono";font-size:12px;font-weight:500;color:var(--blue);background:var(--tint-blue);padding:3px 9px;border-radius:6px;flex:none;margin-top:2px;}
+  .story .body{flex:1;}
+  .story .txt{font-size:14.5px;line-height:1.5;}
+  .story .txt b{font-weight:600;color:var(--ink);}
+  .story .meta{display:flex;align-items:center;gap:10px;margin-top:10px;flex-wrap:wrap;}
+  .story .goto{color:var(--blue);font-weight:500;font-size:13px;display:inline-flex;align-items:center;gap:5px;}
+  .story-grid{display:grid;gap:12px;}
+
+  .nfr-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+  @media (max-width:900px){.nfr-grid{grid-template-columns:1fr;}}
+  .nfr{background:#fff;border:1px solid var(--line);border-radius:var(--r-md);padding:16px 18px;box-shadow:var(--elev-1);}
+  .nfr .top{display:flex;align-items:center;gap:10px;margin-bottom:8px;}
+  .nfr .ic{width:34px;height:34px;border-radius:9px;display:flex;align-items:center;justify-content:center;flex:none;}
+  .nfr .ic svg{width:18px;height:18px;}
+  .nfr .id{font-family:"Roboto Mono";font-size:11px;color:var(--grey-2);}
+  .nfr h4{font-size:14.5px;}
+  .nfr p{color:var(--grey);font-size:13.5px;line-height:1.5;}
+
+  .dod{background:#fff;border:1px solid var(--line);border-radius:var(--r-md);padding:22px;box-shadow:var(--elev-1);}
+  .dod ul{list-style:none;padding:0;margin:0;display:grid;gap:10px;}
+  .dod li{display:flex;gap:11px;font-size:14.5px;align-items:flex-start;}
+  .dod li .chk{width:22px;height:22px;border-radius:6px;background:var(--tint-green);color:var(--green);display:flex;align-items:center;justify-content:center;flex:none;}
+  .dod li .chk svg{width:14px;height:14px;}
+</style>
+</head>
+<body>
+<header class="topbar">
+  <div class="wrap nav">
+    <a class="brand" href="/"><svg class="logo-mark" viewBox="0 0 40 40" fill="none"><rect x="2" y="8" width="26" height="24" rx="6" fill="#1a73e8"/><path d="M30 16.5 L37 12 V28 L30 23.5 Z" fill="#34a853"/><circle cx="12" cy="15.5" r="2.4" fill="#fbbc04"/><rect x="8" y="21" width="12" height="3.4" rx="1.7" fill="#fff" opacity=".9"/><circle cx="24.5" cy="27" r="2.2" fill="#ea4335"/></svg> NextRound</a>
+    <nav class="nav-links">
+      <a href="/">Home</a>
+      <a href="/demo/">Demo</a>
+      <a href="/mvp/" class="active">MVP spec</a>
+      <a href="/journey/b2b.html">Journeys</a>
+    </nav>
+    <div class="nav-right">
+      <span class="clock" id="clock"></span>
+      <a class="btn btn-outline btn-sm" href="/docs/requirements.md" target="_blank">View .md source</a>
+      <a class="btn btn-primary btn-sm" href="/demo/">Open the demo</a>
+    </div>
+  </div>
+</header>
+
+<main>
+<section class="wrap page-head">
+  <div class="kicker"><span class="pill blue"><i style="background:#1a73e8"></i> MVP · Minimal Cool Product</span> Draft spec</div>
+  <h1>What the first version must do</h1>
+  <p class="sub">The smallest version of NextRound that is genuinely useful <i>and</i> feels good to use. Functional requirements are plain user stories; each links to the screen that fulfills it.</p>
+</section>
+
+<section class="wrap section">
+  <div class="onesent">
+    <div class="lbl">The one thing it must do</div>
+    <p>An interviewer can run a fair, monitored live interview in the browser and score the candidate — and the candidate can join in one click.</p>
+  </div>
+</section>
+
+<!-- Scope -->
+<section class="wrap section">
+  <div class="band"><span class="bn">§</span><h2>Scope</h2><span class="line"></span></div>
+  <div class="scope" style="margin-top:16px">
+    <div class="col in">
+      <h3><span class="pill green"><i style="background:#34a853"></i> In scope</span></h3>
+      <ul>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Create an interview room for a role with a fixed question plan</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Invite a candidate via a browser link — no account, no install</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Live 1:1 video interview</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Live integrity signals: tab switch, paste, second person</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Recording + criteria scorecard + hire/no-hire decision</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> A simple dashboard of interviews</li>
+      </ul>
+    </div>
+    <div class="col out">
+      <h3><span class="pill grey">Out of scope — later</span></h3>
+      <ul>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg> Multiple live interviewers in one room</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg> ATS integrations, calendar sync, billing</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg> AI question generation & auto-scoring</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg> Native mobile apps</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- Functional -->
+<section class="wrap section">
+  <div class="band"><span class="bn">1</span><h2>Functional requirements</h2><span class="line"></span><span class="cnt">13 user stories · <b style="color:var(--red)">M</b> must · <b style="color:var(--yellow)">S</b> should</span></div>
+
+  <div class="epic-lbl"><span class="pill blue">Epic A</span> Set up an interview — Recruiter</div>
+  <div class="story-grid">
+    <div class="story"><span class="id">US-1</span><div class="body"><div class="txt">As a <b>recruiter</b>, I want to <b>create an interview room for a role</b>, so that I can invite a candidate to a live session.</div><div class="meta"><span class="pill red">Must</span><a class="goto" href="/demo/dashboard.html">Dashboard →</a></div></div></div>
+    <div class="story"><span class="id">US-2</span><div class="body"><div class="txt">As a <b>recruiter</b>, I want to <b>add a fixed list of questions</b>, so that every candidate for the role is asked the same things.</div><div class="meta"><span class="pill red">Must</span><a class="goto" href="/demo/room.html">Live room →</a></div></div></div>
+    <div class="story"><span class="id">US-3</span><div class="body"><div class="txt">As a <b>recruiter</b>, I want to <b>send the candidate a join link</b>, so that they can enter without installing anything.</div><div class="meta"><span class="pill red">Must</span><a class="goto" href="/demo/candidate-invite.html">Invite →</a></div></div></div>
+  </div>
+
+  <div class="epic-lbl"><span class="pill blue">Epic B</span> Run the live interview — Interviewer</div>
+  <div class="story-grid">
+    <div class="story"><span class="id">US-4</span><div class="body"><div class="txt">As an <b>interviewer</b>, I want to <b>talk to the candidate over live video</b>, so that I can assess them in real time.</div><div class="meta"><span class="pill red">Must</span><a class="goto" href="/demo/room.html">Live room →</a></div></div></div>
+    <div class="story"><span class="id">US-5</span><div class="body"><div class="txt">As an <b>interviewer</b>, I want to <b>follow and check off the question plan</b>, so that I stay on track and cover everything.</div><div class="meta"><span class="pill yellow">Should</span><a class="goto" href="/demo/room.html">Live room →</a></div></div></div>
+    <div class="story"><span class="id">US-6</span><div class="body"><div class="txt">As an <b>interviewer</b>, I want to <b>see integrity signals as they happen</b>, so that I can trust what I'm seeing.</div><div class="meta"><span class="pill red">Must</span><a class="goto" href="/demo/room.html">Live room →</a></div></div></div>
+  </div>
+
+  <div class="epic-lbl"><span class="pill green">Epic C</span> Join as a candidate — Candidate</div>
+  <div class="story-grid">
+    <div class="story"><span class="id">US-7</span><div class="body"><div class="txt">As a <b>candidate</b>, I want to <b>join from a browser link</b>, so that I don't have to download software or make an account.</div><div class="meta"><span class="pill red">Must</span><a class="goto" href="/demo/candidate-invite.html">Invite →</a></div></div></div>
+    <div class="story"><span class="id">US-8</span><div class="body"><div class="txt">As a <b>candidate</b>, I want to <b>check my camera, mic and connection first</b>, so that I'm not caught off guard.</div><div class="meta"><span class="pill yellow">Should</span><a class="goto" href="/demo/candidate-invite.html">Lobby →</a></div></div></div>
+    <div class="story"><span class="id">US-9</span><div class="body"><div class="txt">As a <b>candidate</b>, I want to <b>see what's recorded and monitored and give consent</b>, so that the process feels fair and transparent.</div><div class="meta"><span class="pill red">Must</span><a class="goto" href="/demo/candidate-room.html">In-room →</a></div></div></div>
+  </div>
+
+  <div class="epic-lbl"><span class="pill purple">Epic D</span> Review &amp; decide — Interviewer / Panel</div>
+  <div class="story-grid">
+    <div class="story"><span class="id">US-10</span><div class="body"><div class="txt">As an <b>interviewer</b>, I want to <b>score the candidate against fixed criteria</b>, so that decisions are consistent and comparable.</div><div class="meta"><span class="pill red">Must</span><a class="goto" href="/demo/review.html">Review →</a></div></div></div>
+    <div class="story"><span class="id">US-11</span><div class="body"><div class="txt">As an <b>interviewer</b>, I want to <b>replay the recording and jump to flagged moments</b>, so that I can judge them in context.</div><div class="meta"><span class="pill yellow">Should</span><a class="goto" href="/demo/review.html">Review →</a></div></div></div>
+    <div class="story"><span class="id">US-12</span><div class="body"><div class="txt">As a <b>hiring panel</b>, I want to <b>record a hire / no-hire decision</b>, so that we close the loop on the candidate.</div><div class="meta"><span class="pill red">Must</span><a class="goto" href="/demo/review.html">Review →</a></div></div></div>
+  </div>
+
+  <div class="epic-lbl"><span class="pill blue">Epic E</span> See the pipeline — Recruiter</div>
+  <div class="story-grid">
+    <div class="story"><span class="id">US-13</span><div class="body"><div class="txt">As a <b>recruiter</b>, I want a <b>dashboard of upcoming and completed interviews</b>, so that I know what needs my attention.</div><div class="meta"><span class="pill red">Must</span><a class="goto" href="/demo/dashboard.html">Dashboard →</a></div></div></div>
+  </div>
+</section>
+
+<!-- Non-functional -->
+<section class="wrap section">
+  <div class="band"><span class="bn">2</span><h2>Non-functional requirements</h2><span class="line"></span><span class="cnt">how well it must work</span></div>
+  <div class="nfr-grid" style="margin-top:16px">
+    <div class="nfr"><div class="top"><div class="ic" style="background:var(--tint-blue);color:var(--blue)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 3 14h7l-1 8 10-12h-7l1-8Z"/></svg></div><div><div class="id">NFR-1</div><h4>Performance</h4></div></div><p>Candidate joins in under 3 s; live video latency under ~300 ms; dashboard loads under 1 s.</p></div>
+    <div class="nfr"><div class="top"><div class="ic" style="background:var(--tint-green);color:var(--green)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></div><div><div class="id">NFR-2</div><h4>Usability</h4></div></div><p>Candidate joins in ≤ 2 clicks with no account. Key interviewer actions reachable in one click.</p></div>
+    <div class="nfr"><div class="top"><div class="ic" style="background:var(--tint-purple);color:var(--purple)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a15 15 0 0 1 0 20M12 2a15 15 0 0 0 0 20M2 12h20"/></svg></div><div><div class="id">NFR-3</div><h4>Accessibility</h4></div></div><p>WCAG 2.1 AA: full keyboard nav, visible focus, sufficient contrast, live captions.</p></div>
+    <div class="nfr"><div class="top"><div class="ic" style="background:var(--tint-red);color:var(--red)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 2 4 5v6c0 5 3.4 8.5 8 11 4.6-2.5 8-6 8-11V5l-8-3Z"/></svg></div><div><div class="id">NFR-4</div><h4>Security</h4></div></div><p>Encrypted in transit (TLS) and at rest; recordings visible only to the hiring team.</p></div>
+    <div class="nfr"><div class="top"><div class="ic" style="background:var(--tint-yellow);color:#a56300"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="10" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div><div><div class="id">NFR-5</div><h4>Privacy &amp; compliance</h4></div></div><p>Explicit consent before recording; clear retention window and one-click deletion (GDPR-friendly).</p></div>
+    <div class="nfr"><div class="top"><div class="ic" style="background:var(--tint-blue);color:var(--blue)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-3-6.7L21 8"/><path d="M21 3v5h-5"/></svg></div><div><div class="id">NFR-6</div><h4>Reliability</h4></div></div><p>99.9% uptime target; auto-reconnect on brief drops; recording survives a refresh.</p></div>
+    <div class="nfr"><div class="top"><div class="ic" style="background:var(--tint-green);color:var(--green)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="14" rx="2"/><path d="M8 22h8M12 18v4"/></svg></div><div><div class="id">NFR-7</div><h4>Compatibility</h4></div></div><p>Works on current Chrome, Edge, Safari, Firefox — desktop and tablet, no plugins.</p></div>
+    <div class="nfr"><div class="top"><div class="ic" style="background:var(--tint-purple);color:var(--purple)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="m7 14 4-4 3 3 5-6"/></svg></div><div><div class="id">NFR-8</div><h4>Scalability</h4></div></div><p>Handles many concurrent interview rooms without quality loss.</p></div>
+    <div class="nfr"><div class="top"><div class="ic" style="background:var(--tint-blue);color:var(--blue)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18M3 7.5 12 3l9 4.5M3 7.5 12 12l9-4.5M3 16.5 12 21l9-4.5"/></svg></div><div><div class="id">NFR-9</div><h4>Fairness &amp; integrity</h4></div></div><p>Same questions and criteria per role; integrity flags are signals, never automatic verdicts.</p></div>
+    <div class="nfr"><div class="top"><div class="ic" style="background:var(--tint-yellow);color:#a56300"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h4l3 8 4-16 3 8h4"/></svg></div><div><div class="id">NFR-10</div><h4>Observability</h4></div></div><p>A health endpoint and basic logging so uptime and errors can be monitored.</p></div>
+  </div>
+</section>
+
+<!-- Definition of done -->
+<section class="wrap section">
+  <div class="band"><span class="bn">3</span><h2>Definition of Done</h2><span class="line"></span></div>
+  <div class="dod" style="margin-top:16px">
+    <ul>
+      <li><span class="chk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span> A recruiter can create a room, add questions, and share a link.</li>
+      <li><span class="chk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span> A candidate can join in a browser, pass a device check, and consent.</li>
+      <li><span class="chk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span> Interviewer and candidate can see and hear each other live.</li>
+      <li><span class="chk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span> Integrity signals appear during the call.</li>
+      <li><span class="chk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span> The interview is recorded and can be scored on fixed criteria.</li>
+      <li><span class="chk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span> A hire / no-hire decision is captured.</li>
+    </ul>
+    <div style="margin-top:20px;display:flex;gap:10px;flex-wrap:wrap">
+      <a class="btn btn-primary" href="/demo/">Walk the demo screens →</a>
+      <a class="btn btn-outline" href="/journey/b2b.html">See the journey maps</a>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="foot">
+  <div class="wrap foot-row">
+    <a class="brand" href="/"><svg class="logo-mark" viewBox="0 0 40 40" fill="none"><rect x="2" y="8" width="26" height="24" rx="6" fill="#1a73e8"/><path d="M30 16.5 L37 12 V28 L30 23.5 Z" fill="#34a853"/><circle cx="12" cy="15.5" r="2.4" fill="#fbbc04"/><rect x="8" y="21" width="12" height="3.4" rx="1.7" fill="#fff" opacity=".9"/><circle cx="24.5" cy="27" r="2.2" fill="#ea4335"/></svg> NextRound</a>
+    <span>MVP requirements · source: <a href="/docs/requirements.md" target="_blank" style="color:var(--blue)">docs/requirements.md</a></span>
+    <span class="spacer">© 2026 NextRound</span>
+  </div>
+</footer>
+<script>
+  const clock=document.getElementById('clock');
+  function tick(){const d=new Date();clock.textContent=d.toLocaleTimeString([],{hour:'numeric',minute:'2-digit'})+' · '+d.toLocaleDateString([],{weekday:'short',month:'short',day:'numeric'});}
+  tick();setInterval(tick,10000);
+</script>
+</body>
+</html>

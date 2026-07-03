@@ -1,0 +1,896 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>NextRound — Video interviews that verify real skills</title>
+<meta name="description" content="NextRound is the interview room for hiring teams. Run live interviews, catch cheating as it happens, and review every candidate on the same fair criteria. Like Google Meet, built for interviewing candidates." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Roboto:wght@400;500;700&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --blue:#1a73e8; --blue-hover:#1967d2; --blue-press:#185abc;
+    --green:#34a853; --yellow:#fbbc04; --red:#ea4335;
+    --ink:#202124; --grey:#5f6368; --grey-2:#80868b; --line:#dadce0;
+    --bg:#ffffff; --bg-soft:#f8f9fa; --bg-soft-2:#f1f3f4;
+    --tint-blue:#e8f0fe; --tint-green:#e6f4ea; --tint-yellow:#fef7e0; --tint-red:#fce8e6;
+    --elev-1:0 1px 2px rgba(60,64,67,.30), 0 1px 3px 1px rgba(60,64,67,.15);
+    --elev-2:0 1px 3px rgba(60,64,67,.30), 0 4px 8px 3px rgba(60,64,67,.15);
+    --elev-3:0 2px 6px 2px rgba(60,64,67,.15), 0 8px 24px 4px rgba(60,64,67,.15);
+    --r-sm:8px; --r-md:16px; --r-lg:28px; --r-pill:100px;
+    --maxw:1128px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font-family:"Roboto",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+    font-size:16px; line-height:1.5; -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3{font-family:"Poppins",sans-serif; font-weight:600; color:var(--ink); margin:0; letter-spacing:-.01em;}
+  p{margin:0;}
+  a{color:inherit; text-decoration:none;}
+  .wrap{max-width:var(--maxw); margin:0 auto; padding:0 24px;}
+
+  /* ---------- Buttons ---------- */
+  .btn{
+    display:inline-flex; align-items:center; gap:8px; cursor:pointer; border:none;
+    font-family:"Roboto",sans-serif; font-size:15px; font-weight:500; line-height:1;
+    border-radius:var(--r-pill); padding:0 24px; height:44px; transition:.18s ease;
+    white-space:nowrap;
+  }
+  .btn-primary{background:var(--blue); color:#fff;}
+  .btn-primary:hover{background:var(--blue-hover); box-shadow:var(--elev-1);}
+  .btn-primary:active{background:var(--blue-press);}
+  .btn-ghost{background:transparent; color:var(--blue); padding:0 12px;}
+  .btn-ghost:hover{background:var(--tint-blue);}
+  .btn-outline{background:#fff; color:var(--blue); border:1px solid var(--line);}
+  .btn-outline:hover{background:var(--bg-soft); border-color:#c7ccd1;}
+  .btn svg{width:20px; height:20px;}
+
+  /* ---------- Top bar ---------- */
+  header{position:sticky; top:0; z-index:50; background:rgba(255,255,255,.92); backdrop-filter:blur(8px); transition:box-shadow .2s, border-color .2s; border-bottom:1px solid transparent;}
+  header.scrolled{box-shadow:var(--elev-1); border-bottom-color:var(--line);}
+  .nav{display:flex; align-items:center; height:64px; gap:20px;}
+  .brand{display:flex; align-items:center; gap:11px; font-family:"Poppins"; font-weight:600; font-size:21px; color:var(--ink);}
+  .logo-mark{width:34px; height:34px; flex:none;}
+  .nav-links{display:flex; gap:4px; margin-left:24px;}
+  .nav-links a{color:var(--grey); font-size:15px; font-weight:500; padding:8px 14px; border-radius:var(--r-pill); transition:.15s;}
+  .nav-links a:hover{background:var(--bg-soft-2); color:var(--ink);}
+  .nav-right{margin-left:auto; display:flex; align-items:center; gap:8px;}
+  .clock{color:var(--grey); font-size:14px; font-variant-numeric:tabular-nums; margin-right:6px; white-space:nowrap;}
+  .menu-toggle{display:none; background:none; border:none; cursor:pointer; padding:8px; border-radius:50%;}
+  .menu-toggle:hover{background:var(--bg-soft-2);}
+
+  /* ---------- Hero ---------- */
+  .hero{padding:56px 0 40px;}
+  .hero-grid{display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1.05fr); gap:56px; align-items:center;}
+  .eyebrow{display:inline-flex; align-items:center; gap:8px; background:var(--tint-blue); color:var(--blue-press); font-size:13px; font-weight:500; padding:6px 14px; border-radius:var(--r-pill); margin-bottom:22px;}
+  .eyebrow .dots{display:inline-flex; gap:3px;}
+  .eyebrow .dots i{width:7px; height:7px; border-radius:50%; display:block;}
+  h1.hero-title{font-size:clamp(34px,4.6vw,52px); line-height:1.08; font-weight:600;}
+  h1.hero-title .accent{color:var(--blue);}
+  .hero-sub{margin-top:20px; font-size:18px; color:var(--grey); max-width:30em;}
+
+  .action-row{display:flex; gap:12px; margin-top:32px; flex-wrap:wrap; align-items:center;}
+  .join-field{display:flex; align-items:center; gap:10px; border:1px solid var(--line); border-radius:var(--r-pill); height:44px; padding:0 8px 0 16px; background:#fff; transition:.15s; min-width:236px;}
+  .join-field:focus-within{border-color:var(--blue); box-shadow:0 0 0 1px var(--blue);}
+  .join-field svg{width:20px; height:20px; color:var(--grey-2); flex:none;}
+  .join-field input{border:none; outline:none; font-family:"Roboto"; font-size:15px; color:var(--ink); width:100%; background:transparent;}
+  .join-field input::placeholder{color:var(--grey-2);}
+  .join-btn{background:none; border:none; color:var(--blue); font-weight:500; font-size:15px; cursor:pointer; padding:8px 12px; border-radius:var(--r-pill);}
+  .join-btn:hover{background:var(--tint-blue);}
+  .hero-note{margin-top:22px; padding-top:22px; border-top:1px solid var(--line); color:var(--grey); font-size:14.5px; max-width:34em;}
+  .hero-note a{color:var(--blue); font-weight:500;}
+
+  /* ---------- Hero product mock (signature) ---------- */
+  .stage{position:relative;}
+  .room{position:relative; background:#202124; border-radius:var(--r-md); padding:16px; box-shadow:var(--elev-3); overflow:hidden;}
+  .room-top{display:flex; align-items:center; justify-content:space-between; color:#e8eaed; font-size:12.5px; margin-bottom:12px;}
+  .room-top .rec{display:inline-flex; align-items:center; gap:7px; background:rgba(234,67,53,.16); color:#f6aea6; padding:4px 10px; border-radius:var(--r-pill); font-weight:500;}
+  .room-top .rec i{width:8px; height:8px; border-radius:50%; background:var(--red); display:block; animation:blink 1.6s infinite;}
+  .room-top .meta{color:#9aa0a6; font-variant-numeric:tabular-nums;}
+  .tiles{display:grid; grid-template-columns:1fr; gap:10px;}
+  .tile-main{position:relative; aspect-ratio:16/10; border-radius:12px; background:linear-gradient(150deg,#3c4043,#282a2d); overflow:hidden; display:flex; align-items:center; justify-content:center;}
+  .avatar{width:96px; height:96px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-family:"Poppins"; font-weight:600; font-size:36px; color:#fff; background:#5b8def;}
+  .tile-name{position:absolute; left:12px; bottom:12px; background:rgba(0,0,0,.45); color:#fff; font-size:13px; font-weight:500; padding:4px 10px; border-radius:6px;}
+  .tile-self{position:absolute; right:12px; bottom:12px; width:104px; aspect-ratio:16/11; border-radius:9px; background:linear-gradient(150deg,#41474d,#2b2e31); border:1px solid rgba(255,255,255,.08); display:flex; align-items:center; justify-content:center;}
+  .tile-self .avatar-sm{width:42px; height:42px; border-radius:50%; background:#34a853; color:#fff; display:flex; align-items:center; justify-content:center; font-family:"Poppins"; font-weight:600; font-size:16px;}
+  .controls{display:flex; justify-content:center; gap:10px; margin-top:14px;}
+  .ctrl{width:44px; height:44px; border-radius:50%; background:#3c4043; display:flex; align-items:center; justify-content:center; color:#e8eaed;}
+  .ctrl svg{width:20px; height:20px;}
+  .ctrl.end{background:var(--red); width:60px; border-radius:var(--r-pill);}
+
+  .integrity{position:absolute; top:64px; right:-14px; width:250px; background:#fff; border-radius:14px; box-shadow:var(--elev-3); padding:14px 15px; }
+  .integrity h4{font-family:"Poppins"; font-size:13px; font-weight:600; margin:0 0 2px; display:flex; align-items:center; gap:8px;}
+  .integrity h4 .shield{width:18px; height:18px; color:var(--blue);}
+  .integrity .cap{font-size:11.5px; color:var(--grey-2); margin-bottom:12px;}
+  .signal{display:flex; align-items:center; gap:10px; padding:8px 9px; border-radius:9px; margin-bottom:6px; font-size:12.5px; opacity:0; transform:translateY(6px); animation:pop .5s forwards;}
+  .signal:nth-child(3){animation-delay:.4s;}
+  .signal:nth-child(4){animation-delay:1.4s; background:var(--tint-red);}
+  .signal:nth-child(5){animation-delay:2.6s;}
+  .signal .ico{width:26px; height:26px; border-radius:7px; flex:none; display:flex; align-items:center; justify-content:center;}
+  .signal .ico svg{width:15px; height:15px;}
+  .signal.clean .ico{background:var(--tint-green); color:var(--green);}
+  .signal.warn .ico{background:#fde3e1; color:var(--red);}
+  .signal .txt{line-height:1.25;}
+  .signal .txt b{font-weight:500; color:var(--ink);}
+  .signal .txt span{display:block; color:var(--grey-2); font-size:11px;}
+  .signal .t{margin-left:auto; color:var(--grey-2); font-family:"Roboto Mono"; font-size:10.5px;}
+
+  .carousel-dots{display:flex; justify-content:center; gap:8px; margin-top:22px;}
+  .carousel-dots i{width:8px; height:8px; border-radius:50%; background:var(--line); display:block;}
+  .carousel-dots i.on{background:var(--blue); width:22px; border-radius:var(--r-pill);}
+
+  /* ---------- Logos strip ---------- */
+  .strip{padding:26px 0 6px;}
+  .strip p{text-align:center; color:var(--grey-2); font-size:13px; font-weight:500; letter-spacing:.04em; text-transform:uppercase;}
+  .strip-logos{display:flex; justify-content:center; flex-wrap:wrap; gap:36px 48px; margin-top:20px; opacity:.62;}
+  .strip-logos span{font-family:"Poppins"; font-weight:600; font-size:19px; color:var(--grey);}
+
+  /* ---------- Feature sections ---------- */
+  .section{padding:72px 0;}
+  .feat{display:grid; grid-template-columns:1fr 1fr; gap:64px; align-items:center;}
+  .feat.rev .feat-visual{order:2;}
+  .feat-eyebrow{font-size:13px; font-weight:600; letter-spacing:.04em; text-transform:uppercase; margin-bottom:14px;}
+  .feat h2{font-size:clamp(26px,3vw,34px); line-height:1.15;}
+  .feat > .feat-text > p.lead{margin-top:16px; font-size:17px; color:var(--grey);}
+  .feat-list{list-style:none; padding:0; margin:24px 0 0;}
+  .feat-list li{display:flex; gap:14px; padding:12px 0; border-top:1px solid var(--line);}
+  .feat-list li:first-child{border-top:none;}
+  .feat-list .li-ico{width:34px; height:34px; border-radius:9px; flex:none; display:flex; align-items:center; justify-content:center;}
+  .feat-list .li-ico svg{width:19px; height:19px;}
+  .feat-list b{font-weight:500; display:block; font-size:15.5px;}
+  .feat-list span{color:var(--grey); font-size:14.5px;}
+
+  .panel{border-radius:var(--r-lg); padding:30px; position:relative; overflow:hidden; min-height:340px; display:flex; flex-direction:column; justify-content:center;}
+  .panel.blue{background:var(--tint-blue);}
+  .panel.green{background:var(--tint-green);}
+  .panel.yellow{background:var(--tint-yellow);}
+  .panel.red{background:var(--tint-red);}
+
+  /* integrity feed panel */
+  .feed{background:#fff; border-radius:14px; box-shadow:var(--elev-2); padding:16px;}
+  .feed-head{display:flex; align-items:center; justify-content:space-between; margin-bottom:12px; padding-bottom:12px; border-bottom:1px solid var(--line);}
+  .feed-head b{font-family:"Poppins"; font-size:14px;}
+  .feed-head .live{display:inline-flex; align-items:center; gap:6px; font-size:11.5px; color:var(--green); font-weight:500;}
+  .feed-head .live i{width:7px; height:7px; border-radius:50%; background:var(--green); animation:blink 1.6s infinite;}
+  .feed-row{display:flex; align-items:center; gap:11px; padding:9px 4px; font-size:13px;}
+  .feed-row .fico{width:30px; height:30px; border-radius:8px; flex:none; display:flex; align-items:center; justify-content:center;}
+  .feed-row .fico svg{width:16px; height:16px;}
+  .feed-row.ok .fico{background:var(--tint-green); color:var(--green);}
+  .feed-row.flag .fico{background:#fde3e1; color:var(--red);}
+  .feed-row b{font-weight:500;}
+  .feed-row .ft{margin-left:auto; font-family:"Roboto Mono"; font-size:11px; color:var(--grey-2);}
+  .keys{display:flex; gap:6px; margin-top:2px;}
+  .kbd{font-family:"Roboto Mono"; font-size:11px; background:var(--bg-soft-2); border:1px solid var(--line); border-bottom-width:2px; border-radius:5px; padding:2px 7px; color:var(--ink);}
+
+  /* plan panel */
+  .plan-card{background:#fff; border-radius:12px; box-shadow:var(--elev-2); padding:16px; margin-bottom:12px;}
+  .plan-card .tag{font-size:11px; font-weight:500; color:var(--blue); background:var(--tint-blue); padding:3px 10px; border-radius:var(--r-pill); display:inline-block; margin-bottom:10px;}
+  .plan-q{display:flex; align-items:center; gap:10px; padding:9px 0; border-top:1px solid var(--bg-soft-2); font-size:13.5px; color:var(--ink);}
+  .plan-q:first-of-type{border-top:none;}
+  .plan-q .num{width:22px; height:22px; border-radius:50%; background:var(--bg-soft-2); font-size:11px; display:flex; align-items:center; justify-content:center; color:var(--grey); flex:none;}
+
+  /* recording panel */
+  .rec-card{background:#202124; border-radius:12px; overflow:hidden; box-shadow:var(--elev-2);}
+  .rec-thumb{aspect-ratio:16/9; background:linear-gradient(150deg,#3c4043,#26282b); position:relative; display:flex; align-items:center; justify-content:center;}
+  .play{width:56px; height:56px; border-radius:50%; background:rgba(255,255,255,.92); display:flex; align-items:center; justify-content:center; box-shadow:var(--elev-1);}
+  .play svg{width:24px; height:24px; color:var(--ink); margin-left:3px;}
+  .rec-scrub{position:absolute; left:14px; right:14px; bottom:14px; height:4px; background:rgba(255,255,255,.25); border-radius:3px;}
+  .rec-scrub i{display:block; width:42%; height:100%; background:var(--red); border-radius:3px;}
+  .rec-foot{display:flex; align-items:center; gap:10px; padding:13px 15px; color:#e8eaed;}
+  .rec-foot .avatar-sm{width:30px; height:30px; border-radius:50%; background:#5b8def; color:#fff; font-family:"Poppins"; font-weight:600; font-size:12px; display:flex; align-items:center; justify-content:center;}
+  .rec-foot .rf-name{font-size:13px; font-weight:500;}
+  .rec-foot .rf-sub{font-size:11.5px; color:#9aa0a6;}
+  .rec-foot .share{margin-left:auto; font-size:12px; color:#8ab4f8; display:inline-flex; align-items:center; gap:6px;}
+
+  /* scorecard panel */
+  .score-card{background:#fff; border-radius:12px; box-shadow:var(--elev-2); padding:18px;}
+  .score-head{display:flex; align-items:center; gap:11px; margin-bottom:14px;}
+  .score-head .avatar-sm{width:38px; height:38px; border-radius:50%; background:var(--yellow); color:#3c2b00; font-family:"Poppins"; font-weight:600; font-size:15px; display:flex; align-items:center; justify-content:center;}
+  .score-head b{font-size:14.5px;}
+  .score-head span{font-size:12px; color:var(--grey);}
+  .score-row{display:flex; align-items:center; gap:12px; margin-bottom:11px;}
+  .score-row .sl{font-size:12.5px; width:96px; color:var(--grey); flex:none;}
+  .bar{flex:1; height:7px; background:var(--bg-soft-2); border-radius:4px; overflow:hidden;}
+  .bar i{display:block; height:100%; border-radius:4px; background:var(--blue);}
+  .score-row .sv{font-family:"Roboto Mono"; font-size:11.5px; color:var(--grey); width:30px; text-align:right;}
+  .ai-summary{margin-top:14px; padding:12px; background:var(--tint-blue); border-radius:10px; font-size:12.5px; color:#174ea6; line-height:1.45;}
+  .ai-summary b{display:flex; align-items:center; gap:7px; font-weight:600; margin-bottom:5px; color:var(--blue-press);}
+  .ai-summary b svg{width:15px; height:15px;}
+
+  /* ---------- How it works ---------- */
+  .how{background:var(--bg-soft); border-radius:var(--r-lg); padding:56px 40px;}
+  .how h2{text-align:center; font-size:clamp(26px,3vw,34px);}
+  .how-sub{text-align:center; color:var(--grey); margin-top:12px; font-size:17px;}
+  .steps{display:grid; grid-template-columns:repeat(3,1fr); gap:28px; margin-top:44px;}
+  .step{position:relative; background:#fff; border-radius:var(--r-md); padding:26px 24px; box-shadow:var(--elev-1);}
+  .step .n{font-family:"Poppins"; font-weight:600; font-size:14px; color:#fff; width:32px; height:32px; border-radius:50%; display:flex; align-items:center; justify-content:center; margin-bottom:16px;}
+  .step h3{font-size:18px; margin-bottom:8px;}
+  .step p{color:var(--grey); font-size:14.5px;}
+
+  /* ---------- CTA ---------- */
+  .cta{background:linear-gradient(120deg,#1a73e8,#1558c0); border-radius:var(--r-lg); padding:56px 40px; text-align:center; color:#fff;}
+  .cta h2{color:#fff; font-size:clamp(26px,3.2vw,36px);}
+  .cta p{color:#d2e3fc; margin-top:14px; font-size:17px;}
+  .cta-actions{display:flex; gap:12px; justify-content:center; margin-top:28px; flex-wrap:wrap;}
+  .cta .btn-white{background:#fff; color:var(--blue);}
+  .cta .btn-white:hover{background:#f1f3f4; box-shadow:var(--elev-1);}
+  .cta .btn-line{background:transparent; color:#fff; border:1px solid rgba(255,255,255,.5);}
+  .cta .btn-line:hover{background:rgba(255,255,255,.12);}
+
+  /* ---------- Footer ---------- */
+  footer{padding:56px 0 40px; border-top:1px solid var(--line); margin-top:80px;}
+  .foot-grid{display:flex; justify-content:space-between; gap:40px; flex-wrap:wrap;}
+  .foot-brand{max-width:260px;}
+  .foot-brand .brand{margin-bottom:14px;}
+  .foot-brand p{color:var(--grey); font-size:14px;}
+  .foot-cols{display:flex; gap:64px; flex-wrap:wrap;}
+  .foot-col h5{font-family:"Roboto"; font-size:13px; font-weight:700; text-transform:uppercase; letter-spacing:.04em; color:var(--grey); margin:0 0 14px;}
+  .foot-col a{display:block; color:var(--ink); font-size:14.5px; padding:5px 0;}
+  .foot-col a:hover{color:var(--blue);}
+  .foot-bottom{display:flex; justify-content:space-between; gap:16px; flex-wrap:wrap; margin-top:44px; padding-top:24px; border-top:1px solid var(--line); color:var(--grey-2); font-size:13px;}
+  .foot-bottom .disclaimer{max-width:52ch;}
+
+  /* ---------- Reveal + keyframes ---------- */
+  .reveal{opacity:0; transform:translateY(20px); transition:opacity .6s ease, transform .6s ease;}
+  .reveal.in{opacity:1; transform:none;}
+  @keyframes pop{to{opacity:1; transform:none;}}
+  @keyframes blink{0%,100%{opacity:1;}50%{opacity:.35;}}
+  @keyframes rise{from{opacity:0; transform:translateY(16px);}to{opacity:1; transform:none;}}
+  .hero-anim{animation:rise .7s ease both;}
+  .hero-anim.d2{animation-delay:.08s;}
+  .hero-anim.d3{animation-delay:.16s;}
+  .hero-anim.d4{animation-delay:.24s;}
+
+  /* ---------- Responsive ---------- */
+  @media (max-width:920px){
+    .hero-grid{grid-template-columns:1fr; gap:44px;}
+    .feat{grid-template-columns:1fr; gap:36px;}
+    .feat.rev .feat-visual{order:0;}
+    .steps{grid-template-columns:1fr;}
+    .nav-links,.clock{display:none;}
+    .menu-toggle{display:flex;}
+    .integrity{right:8px; top:52px; width:220px;}
+  }
+  @media (max-width:520px){
+    .hero{padding:36px 0 24px;}
+    .action-row{flex-direction:column; align-items:stretch;}
+    .join-field{min-width:0;}
+    .integrity{position:static; width:auto; margin-top:14px; box-shadow:var(--elev-1);}
+    .how,.cta,.panel{padding-left:22px; padding-right:22px;}
+    .foot-cols{gap:32px;}
+  }
+  @media (prefers-reduced-motion:reduce){
+    *{animation:none !important; transition:none !important;}
+    .reveal{opacity:1; transform:none;}
+    .signal{opacity:1; transform:none;}
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ HEADER ============ -->
+<header id="hdr">
+  <div class="wrap nav">
+    <a class="brand" href="#top" aria-label="NextRound home">
+      <svg class="logo-mark" viewBox="0 0 40 40" fill="none" aria-hidden="true">
+        <rect x="2" y="8" width="26" height="24" rx="6" fill="#1a73e8"/>
+        <path d="M30 16.5 L37 12 V28 L30 23.5 Z" fill="#34a853"/>
+        <circle cx="12" cy="15.5" r="2.4" fill="#fbbc04"/>
+        <rect x="8" y="21" width="12" height="3.4" rx="1.7" fill="#ffffff" opacity=".9"/>
+        <circle cx="24.5" cy="27" r="2.2" fill="#ea4335"/>
+      </svg>
+      NextRound
+    </a>
+    <nav class="nav-links">
+      <a href="#integrity">Integrity</a>
+      <a href="#structure">Interviews</a>
+      <a href="#review">Review</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+    <div class="nav-right">
+      <span class="clock" id="clock"></span>
+      <a class="btn btn-ghost" href="#">Sign in</a>
+      <a class="btn btn-primary" href="#cta">Start an interview</a>
+      <button class="menu-toggle" aria-label="Menu">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#5f6368" stroke-width="2" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div class="hero-text">
+      <span class="eyebrow hero-anim">
+        <span class="dots"><i style="background:#1a73e8"></i><i style="background:#34a853"></i><i style="background:#fbbc04"></i><i style="background:#ea4335"></i></span>
+        Like Google Meet — for interviewing candidates
+      </span>
+      <h1 class="hero-title hero-anim d2">Video interviews that <span class="accent">verify real skills</span></h1>
+      <p class="hero-sub hero-anim d3">Run live interviews, catch cheating the moment it happens, and review every candidate against the same fair criteria — all in one room.</p>
+
+      <div class="action-row hero-anim d4">
+        <a class="btn btn-primary" href="#cta">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17 10.5V7a1 1 0 0 0-1-1H4a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-3.5l4 4v-11l-4 4Z"/></svg>
+          New interview
+        </a>
+        <div class="join-field">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M7 10h.01M11 10h.01M15 10h.01M7 14h10"/></svg>
+          <input type="text" placeholder="Enter a code or link" aria-label="Enter an interview code or link" />
+          <button class="join-btn">Join</button>
+        </div>
+      </div>
+      <p class="hero-note hero-anim d4">No installs for candidates — they join from a browser link. <a href="#how">See how a round works →</a></p>
+    </div>
+
+    <!-- signature: live interview room -->
+    <div class="stage hero-anim d3">
+      <div class="room" aria-label="Interview room preview">
+        <div class="room-top">
+          <span class="rec"><i></i> Recording</span>
+          <span class="meta">Senior Backend Engineer · 34:12</span>
+        </div>
+        <div class="tiles">
+          <div class="tile-main">
+            <div class="avatar" style="background:#5b8def">AK</div>
+            <span class="tile-name">Aida K. · Candidate</span>
+            <div class="tile-self"><div class="avatar-sm">NR</div></div>
+          </div>
+        </div>
+        <div class="controls">
+          <div class="ctrl"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 15a3 3 0 0 0 3-3V6a3 3 0 0 0-6 0v6a3 3 0 0 0 3 3Zm5-3a5 5 0 0 1-10 0H5a7 7 0 0 0 6 6.9V21h2v-2.1A7 7 0 0 0 19 12h-2Z"/></svg></div>
+          <div class="ctrl"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17 10.5V7a1 1 0 0 0-1-1H4a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-3.5l4 4v-11l-4 4Z"/></svg></div>
+          <div class="ctrl"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 5h16v11H4z"/><path d="M9 20h6M12 16v4"/></svg></div>
+          <div class="ctrl end"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 9c-1.6 0-3.15.25-4.6.72v3.1c0 .39-.23.74-.56.9-.98.49-1.87 1.12-2.66 1.85a.98.98 0 0 1-1.35-.03L.29 13.08a.99.99 0 0 1 .03-1.4C3.34 8.78 7.46 7 12 7s8.66 1.78 11.68 4.68a.99.99 0 0 1 .03 1.4l-2.58 2.36a.98.98 0 0 1-1.35.03 12.6 12.6 0 0 0-2.66-1.85.998.998 0 0 1-.56-.9v-3.1A15.6 15.6 0 0 0 12 9Z"/></svg></div>
+        </div>
+      </div>
+
+      <!-- floating integrity panel -->
+      <div class="integrity">
+        <h4><svg class="shield" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 2 4 5v6c0 5 3.4 8.5 8 11 4.6-2.5 8-6 8-11V5l-8-3Z"/></svg> Integrity monitor</h4>
+        <p class="cap">Live during the interview</p>
+        <div class="signal clean"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div><div class="txt"><b>In interview tab</b><span>Focused</span></div></div>
+        <div class="signal warn"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 9v4M12 17h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/></svg></div><div class="txt"><b>Paste detected</b><span>Ctrl + V</span></div><span class="t">34:02</span></div>
+        <div class="signal warn"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="14" height="10" rx="2"/><rect x="9" y="9" width="13" height="9" rx="2"/></svg></div><div class="txt"><b>2nd display connected</b><span>External monitor</span></div><span class="t">34:07</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrap"><div class="carousel-dots hero-anim d4"><i class="on"></i><i></i><i></i><i></i></div></div>
+</section>
+
+<!-- ============ LOGO STRIP ============ -->
+<section class="strip">
+  <div class="wrap">
+    <p class="reveal">Built for teams that hire remotely</p>
+    <div class="strip-logos reveal">
+      <span>Screenly</span><span>IT Bench</span><span>Digital Nomads</span><span>Remote CIS</span><span>TalentLoop</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ STAKES styles ============ -->
+<style>
+  .stakes-head{text-align:center; max-width:680px; margin:0 auto;}
+  .stakes-eyebrow{font-size:13px; font-weight:600; letter-spacing:.05em; text-transform:uppercase; color:var(--red); margin-bottom:14px;}
+  .stakes-head h2{font-size:clamp(28px,3.4vw,40px); line-height:1.12;}
+  .stakes-head p{color:var(--grey); font-size:18px; margin-top:16px;}
+
+  .stakes-stats{display:grid; grid-template-columns:1.25fr 1fr; gap:22px; margin-top:44px;}
+  .stat-card{background:var(--bg-soft); border-radius:22px; padding:34px 34px 32px; display:flex; flex-direction:column; justify-content:center;}
+  .people-row{display:flex; flex-wrap:wrap; gap:7px; margin-bottom:22px;}
+  .people-row .p{width:27px; height:27px; display:block;}
+  .people-row .p svg{width:100%; height:100%;}
+  .people-row .p.on{color:var(--red);}
+  .people-row .p.off{color:#d3d6da;}
+  .stat-big{font-family:"Poppins"; font-weight:600; font-size:clamp(38px,5.4vw,58px); line-height:1; letter-spacing:-.02em; color:var(--ink);}
+  .stat-big .sub{font-size:.42em; font-weight:500; color:var(--grey); letter-spacing:0;}
+  .stat-label{color:var(--grey); font-size:15.5px; margin-top:14px; max-width:24em;}
+  .stat-card.cost{align-items:flex-start; background:var(--tint-red);}
+  .stat-card.cost .stat-big{color:#c5221f;}
+
+  .cost-head{font-family:"Poppins"; font-weight:600; font-size:20px; text-align:center; margin:52px 0 22px;}
+  .cost-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:16px;}
+  .cost-item{display:flex; align-items:center; gap:14px; padding:18px 20px; border:1px solid var(--line); border-radius:14px; background:#fff; font-size:15px; font-weight:500; transition:.18s;}
+  .cost-item:hover{box-shadow:var(--elev-1); border-color:#c7ccd1;}
+  .cost-item .cico{width:38px; height:38px; border-radius:10px; background:var(--tint-red); color:var(--red); display:flex; align-items:center; justify-content:center; flex:none;}
+  .cost-item .cico svg{width:19px; height:19px;}
+  @media (max-width:920px){
+    .stakes-stats{grid-template-columns:1fr;}
+    .cost-grid{grid-template-columns:1fr;}
+  }
+  @media (min-width:521px) and (max-width:920px){ .cost-grid{grid-template-columns:1fr 1fr;} }
+</style>
+
+<!-- ============ STAKES ============ -->
+<section class="section" id="stakes">
+  <div class="wrap reveal">
+    <div class="stakes-head">
+      <div class="stakes-eyebrow">The stakes</div>
+      <h2>Cheating is the new normal. Bad hires are expensive.</h2>
+      <p>AI cheating tools have quietly changed technical interviews. The candidates who slip through don't just underperform — they cost you across the entire hiring cycle.</p>
+    </div>
+
+    <div class="stakes-stats">
+      <div class="stat-card">
+        <div class="people-row" aria-hidden="true">
+          <span class="p on"><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="7" r="4.2"/><path d="M12 13c-4.4 0-8 2.9-8 6.5V21h16v-1.5c0-3.6-3.6-6.5-8-6.5Z"/></svg></span>
+          <span class="p on"><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="7" r="4.2"/><path d="M12 13c-4.4 0-8 2.9-8 6.5V21h16v-1.5c0-3.6-3.6-6.5-8-6.5Z"/></svg></span>
+          <span class="p on"><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="7" r="4.2"/><path d="M12 13c-4.4 0-8 2.9-8 6.5V21h16v-1.5c0-3.6-3.6-6.5-8-6.5Z"/></svg></span>
+          <span class="p on"><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="7" r="4.2"/><path d="M12 13c-4.4 0-8 2.9-8 6.5V21h16v-1.5c0-3.6-3.6-6.5-8-6.5Z"/></svg></span>
+          <span class="p on"><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="7" r="4.2"/><path d="M12 13c-4.4 0-8 2.9-8 6.5V21h16v-1.5c0-3.6-3.6-6.5-8-6.5Z"/></svg></span>
+          <span class="p on"><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="7" r="4.2"/><path d="M12 13c-4.4 0-8 2.9-8 6.5V21h16v-1.5c0-3.6-3.6-6.5-8-6.5Z"/></svg></span>
+          <span class="p on"><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="7" r="4.2"/><path d="M12 13c-4.4 0-8 2.9-8 6.5V21h16v-1.5c0-3.6-3.6-6.5-8-6.5Z"/></svg></span>
+          <span class="p off"><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="7" r="4.2"/><path d="M12 13c-4.4 0-8 2.9-8 6.5V21h16v-1.5c0-3.6-3.6-6.5-8-6.5Z"/></svg></span>
+          <span class="p off"><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="7" r="4.2"/><path d="M12 13c-4.4 0-8 2.9-8 6.5V21h16v-1.5c0-3.6-3.6-6.5-8-6.5Z"/></svg></span>
+          <span class="p off"><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="7" r="4.2"/><path d="M12 13c-4.4 0-8 2.9-8 6.5V21h16v-1.5c0-3.6-3.6-6.5-8-6.5Z"/></svg></span>
+        </div>
+        <div class="stat-big">7 <span class="sub">in 10</span></div>
+        <p class="stat-label">candidates cheat in technical online interviews using AI tools, as of 2026.</p>
+      </div>
+
+      <div class="stat-card cost">
+        <div class="stat-big">$10k–$100k</div>
+        <p class="stat-label">is what a single bad hire can cost your company.</p>
+      </div>
+    </div>
+
+    <div class="cost-head">Where the cost of a bad hire hides</div>
+    <div class="cost-grid">
+      <div class="cost-item"><span class="cico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M19 8v6M22 11h-6"/></svg></span>Employee onboarding &amp; ramp-up</div>
+      <div class="cost-item"><span class="cico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><path d="M16 17l5-5-5-5M21 12H9"/></svg></span>Offboarding &amp; knowledge transfer</div>
+      <div class="cost-item"><span class="cico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 0 1 15-6.7L21 8M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-15 6.7L3 16M3 21v-5h5"/></svg></span>Replacement &amp; re-hiring costs</div>
+      <div class="cost-item"><span class="cico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18M7 7l-4 6h8L7 7ZM17 7l-4 6h8l-4-6Z"/><path d="M4 21h16"/></svg></span>Legal &amp; compliance risks</div>
+      <div class="cost-item"><span class="cico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 18l-8-8-5 5-7-7"/><path d="M17 18h6v-6"/></svg></span>Lost team productivity</div>
+      <div class="cost-item"><span class="cico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 2l4 4-4 4"/><path d="M3 11v-1a4 4 0 0 1 4-4h14M7 22l-4-4 4-4"/><path d="M21 13v1a4 4 0 0 1-4 4H3"/></svg></span>Manager &amp; team rework time</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FEATURE 1 · INTEGRITY ============ -->
+<section class="section" id="integrity">
+  <div class="wrap feat reveal">
+    <div class="feat-text">
+      <div class="feat-eyebrow" style="color:var(--red)">Zero-cheating interview room</div>
+      <h2>See what happens during the interview</h2>
+      <p class="lead">NextRound surfaces the signals that reveal coached or AI-assisted answers — clearly, and in context, so you never have to guess.</p>
+      <ul class="feat-list">
+        <li>
+          <div class="li-ico" style="background:var(--tint-blue); color:var(--blue)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M3 9h18"/></svg></div>
+          <div><b>Tab &amp; window switching</b><span>Know the moment a candidate leaves the interview tab or opens another window.</span></div>
+        </li>
+        <li>
+          <div class="li-ico" style="background:var(--tint-yellow); color:#b8860b"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M6 10h.01M10 10h.01M14 10h.01M18 10h.01M8 14h8"/></svg></div>
+          <div><b>Keystrokes &amp; shortcuts</b><span>Every keypress — including copy and paste — laid out in a clear timeline.</span></div>
+        </li>
+        <li>
+          <div class="li-ico" style="background:var(--tint-green); color:var(--green)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="13" height="9" rx="2"/><rect x="9" y="10" width="13" height="9" rx="2"/></svg></div>
+          <div><b>Multiple monitors</b><span>Get flagged automatically when an external display is connected.</span></div>
+        </li>
+      </ul>
+    </div>
+    <div class="feat-visual">
+      <div class="panel red">
+        <div class="feed">
+          <div class="feed-head"><b>Integrity timeline</b><span class="live"><i></i> Live</span></div>
+          <div class="feed-row ok"><div class="fico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div><div><b>Interview started</b></div><span class="ft">00:00</span></div>
+          <div class="feed-row flag"><div class="fico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M3 9h18"/></svg></div><div><b>Switched to another tab</b><div class="keys"><span class="kbd">Alt</span><span class="kbd">Tab</span></div></div><span class="ft">12:41</span></div>
+          <div class="feed-row flag"><div class="fico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg></div><div><b>Pasted into answer</b><div class="keys"><span class="kbd">Ctrl</span><span class="kbd">V</span></div></div><span class="ft">13:02</span></div>
+          <div class="feed-row flag"><div class="fico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="13" height="9" rx="2"/><rect x="9" y="10" width="13" height="9" rx="2"/></svg></div><div><b>Second display detected</b></div><span class="ft">13:05</span></div>
+          <div class="feed-row ok"><div class="fico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div><div><b>Returned to interview</b></div><span class="ft">13:20</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FEATURE 2 · STRUCTURE ============ -->
+<section class="section" id="structure" style="padding-top:0">
+  <div class="wrap feat rev reveal">
+    <div class="feat-visual">
+      <div class="panel blue">
+        <div class="plan-card">
+          <span class="tag">Senior Backend Engineer</span>
+          <div class="plan-q"><span class="num">1</span> Walk through a system you scaled past its first bottleneck.</div>
+          <div class="plan-q"><span class="num">2</span> How do you design an idempotent payment webhook?</div>
+          <div class="plan-q"><span class="num">3</span> Debug: this query is slow under load. Where do you look?</div>
+        </div>
+        <div class="plan-card" style="margin-bottom:0">
+          <span class="tag" style="color:var(--green); background:var(--tint-green)">Same bar, every candidate</span>
+          <div class="plan-q"><span class="num">4</span> Trade-offs: SQL vs. event sourcing for this feature.</div>
+        </div>
+      </div>
+    </div>
+    <div class="feat-text">
+      <div class="feat-eyebrow" style="color:var(--blue)">Structured interviews</div>
+      <h2>Hold every candidate to the same fair bar</h2>
+      <p class="lead">Plan, run, and review in one place. Build a structured plan per role so the conversation stays on the core signals — and everyone is measured the same way.</p>
+      <ul class="feat-list">
+        <li>
+          <div class="li-ico" style="background:var(--tint-blue); color:var(--blue)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3 8-8"/><path d="M20 12v7a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h9"/></svg></div>
+          <div><b>Interview plans with tailored questions</b><span>Role-specific plans keep the round focused and repeatable across your team.</span></div>
+        </li>
+        <li>
+          <div class="li-ico" style="background:var(--tint-green); color:var(--green)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h4l3 8 4-16 3 8h4"/></svg></div>
+          <div><b>One shared workspace</b><span>Everything the panel needs — plan, room, and notes — lives in a single place.</span></div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FEATURE 3 · RECORDINGS ============ -->
+<section class="section" id="review" style="padding-top:0">
+  <div class="wrap feat reveal">
+    <div class="feat-text">
+      <div class="feat-eyebrow" style="color:var(--green)">Recordings</div>
+      <h2>Share the interview, not your memory</h2>
+      <p class="lead">Every round is recorded and stored securely. Send a link to hiring managers and peers instead of trying to retell what happened.</p>
+      <ul class="feat-list">
+        <li>
+          <div class="li-ico" style="background:var(--tint-green); color:var(--green)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 7l-7 5 7 5V7Z"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg></div>
+          <div><b>Stored recordings you can share</b><span>Secure links let the whole panel review on their own time.</span></div>
+        </li>
+        <li>
+          <div class="li-ico" style="background:var(--tint-blue); color:var(--blue)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.6 13.5l6.8 4M15.4 6.5l-6.8 4"/></svg></div>
+          <div><b>Jump to the flagged moments</b><span>Integrity events are pinned on the timeline, so reviewers go straight to them.</span></div>
+        </li>
+      </ul>
+    </div>
+    <div class="feat-visual">
+      <div class="panel green">
+        <div class="rec-card">
+          <div class="rec-thumb">
+            <div class="play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></div>
+            <div class="rec-scrub"><i></i></div>
+          </div>
+          <div class="rec-foot">
+            <div class="avatar-sm">AK</div>
+            <div><div class="rf-name">Aida K. — Senior Backend Engineer</div><div class="rf-sub">Recorded Jul 1 · 42 min · 3 flags</div></div>
+            <span class="share"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.6 13.5l6.8 4M15.4 6.5l-6.8 4"/></svg> Share</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FEATURE 4 · SCORECARDS + AI ============ -->
+<section class="section" style="padding-top:0">
+  <div class="wrap feat rev reveal">
+    <div class="feat-visual">
+      <div class="panel yellow">
+        <div class="score-card">
+          <div class="score-head"><div class="avatar-sm">AK</div><div><b>Aida K.</b><br><span>Senior Backend Engineer</span></div></div>
+          <div class="score-row"><span class="sl">System design</span><div class="bar"><i style="width:88%"></i></div><span class="sv">4.4</span></div>
+          <div class="score-row"><span class="sl">Coding</span><div class="bar"><i style="width:76%; background:var(--green)"></i></div><span class="sv">3.8</span></div>
+          <div class="score-row"><span class="sl">Communication</span><div class="bar"><i style="width:92%; background:var(--yellow)"></i></div><span class="sv">4.6</span></div>
+          <div class="ai-summary">
+            <b><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.9 4.6L18.5 9.5 13.9 11.4 12 16l-1.9-4.6L5.5 9.5l4.6-1.9L12 3Z"/></svg> AI summary</b>
+            Strong on distributed systems and trade-off reasoning. One integrity flag (paste at 13:02) worth reviewing before the next round.
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="feat-text">
+      <div class="feat-eyebrow" style="color:#b8860b">Fair decisions</div>
+      <h2>Decide with evidence, not vibes</h2>
+      <p class="lead">Capture structured feedback with shared scorecards and ratings. An AI summary highlights strengths and risks against the same criteria for every candidate.</p>
+      <ul class="feat-list">
+        <li>
+          <div class="li-ico" style="background:var(--tint-yellow); color:#b8860b"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l3 6.9 7.5.6-5.7 4.9 1.8 7.3L12 17.8 5.4 21.7l1.8-7.3L1.5 9.5 9 8.9 12 2Z"/></svg></div>
+          <div><b>Scorecards &amp; ratings</b><span>Same criteria, same weights — so panels compare like for like.</span></div>
+        </li>
+        <li>
+          <div class="li-ico" style="background:var(--tint-blue); color:var(--blue)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.9 4.6L18.5 9.5 13.9 11.4 12 16l-1.9-4.6L5.5 9.5l4.6-1.9L12 3Z"/></svg></div>
+          <div><b>Unbiased AI support</b><span>A consistent summary of strengths and risks, applied identically to everyone.</span></div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ============ HOW IT WORKS ============ -->
+<section class="section" id="how" style="padding-top:0">
+  <div class="wrap">
+    <div class="how reveal">
+      <h2>Three steps to a fair round</h2>
+      <p class="how-sub">Plan it, run it, review it — without leaving NextRound.</p>
+      <div class="steps">
+        <div class="step">
+          <div class="n" style="background:var(--blue)">1</div>
+          <h3>Plan</h3>
+          <p>Pick a role template and set the questions every candidate will answer.</p>
+        </div>
+        <div class="step">
+          <div class="n" style="background:var(--green)">2</div>
+          <h3>Interview</h3>
+          <p>Meet the candidate in a monitored room. Integrity signals record as you talk.</p>
+        </div>
+        <div class="step">
+          <div class="n" style="background:var(--yellow)">3</div>
+          <h3>Review</h3>
+          <p>Compare recordings, scorecards, and AI summaries — then decide with confidence.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PRICING + FAQ styles ============ -->
+<style>
+  .pricing-head{text-align:center; max-width:640px; margin:0 auto;}
+  .pricing-head h2{font-size:clamp(28px,3.2vw,38px);}
+  .pricing-head p{color:var(--grey); font-size:18px; margin-top:14px;}
+
+  .bill-toggle{display:inline-flex; align-items:center; gap:6px; background:var(--bg-soft-2); border-radius:var(--r-pill); padding:5px; margin:28px auto 0; position:relative;}
+  .bill-toggle button{border:none; background:transparent; cursor:pointer; font-family:"Roboto"; font-size:14px; font-weight:500; color:var(--grey); padding:9px 20px; border-radius:var(--r-pill); transition:.18s; display:inline-flex; align-items:center; gap:8px;}
+  .bill-toggle button.active{background:#fff; color:var(--ink); box-shadow:var(--elev-1);}
+  .save-badge{font-size:11px; font-weight:600; color:var(--green); background:var(--tint-green); padding:2px 8px; border-radius:var(--r-pill);}
+  .toggle-center{display:flex; justify-content:center;}
+
+  .price-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:24px; margin-top:44px; align-items:stretch;}
+  .price-card{border:1px solid var(--line); border-radius:22px; background:#fff; padding:32px 28px; display:flex; flex-direction:column; transition:.2s;}
+  .price-card:hover{box-shadow:var(--elev-2);}
+  .price-card.popular{border:2px solid var(--blue); box-shadow:var(--elev-2); position:relative;}
+  .pop-badge{position:absolute; top:-13px; left:50%; transform:translateX(-50%); background:var(--blue); color:#fff; font-size:12px; font-weight:600; padding:5px 16px; border-radius:var(--r-pill); font-family:"Roboto";}
+  .price-name{font-family:"Poppins"; font-weight:600; font-size:20px;}
+  .price-amount-row{display:flex; align-items:baseline; gap:6px; margin-top:16px;}
+  .price-amount{font-family:"Poppins"; font-weight:600; font-size:44px; line-height:1; letter-spacing:-.02em;}
+  .price-per{color:var(--grey); font-size:15px;}
+  .annual-note{color:var(--green); font-size:13px; font-weight:500; margin-top:8px; min-height:18px;}
+  .price-features{list-style:none; padding:0; margin:24px 0 28px; flex:1;}
+  .price-features li{display:flex; gap:11px; align-items:flex-start; padding:8px 0; font-size:14.5px; color:var(--ink);}
+  .price-features .chk{width:20px; height:20px; flex:none; border-radius:50%; background:var(--tint-green); color:var(--green); display:flex; align-items:center; justify-content:center; margin-top:1px;}
+  .price-features .chk svg{width:12px; height:12px;}
+  .price-cta{width:100%; justify-content:center;}
+
+  .faq-wrap{max-width:820px; margin:0 auto;}
+  .faq-wrap h2{text-align:center; font-size:clamp(26px,3vw,34px); margin-bottom:8px;}
+  .faq-wrap .faq-intro{text-align:center; color:var(--grey); font-size:17px; margin-bottom:36px;}
+  .faq-item{border-top:1px solid var(--line);}
+  .faq-item:last-child{border-bottom:1px solid var(--line);}
+  .faq-q{width:100%; background:none; border:none; cursor:pointer; text-align:left; display:flex; align-items:center; gap:20px; padding:22px 4px; font-family:"Poppins"; font-weight:500; font-size:17px; color:var(--ink);}
+  .faq-q:hover{color:var(--blue);}
+  .faq-ic{margin-left:auto; flex:none; width:26px; height:26px; display:flex; align-items:center; justify-content:center; color:var(--grey); transition:transform .3s ease;}
+  .faq-item.open .faq-ic{transform:rotate(45deg); color:var(--blue);}
+  .faq-a{overflow:hidden; max-height:0; transition:max-height .32s ease;}
+  .faq-item.open .faq-a{max-height:420px;}
+  .faq-a p{color:var(--grey); font-size:15.5px; line-height:1.6; padding:0 4px 24px; max-width:70ch;}
+  .faq-a a{color:var(--blue); font-weight:500;}
+  @media (max-width:920px){ .price-grid{grid-template-columns:1fr; max-width:440px; margin-left:auto; margin-right:auto;} }
+  @media (prefers-reduced-motion:reduce){ .faq-a{transition:none;} }
+</style>
+
+<!-- ============ PRICING ============ -->
+<section class="section" id="pricing" style="padding-top:0">
+  <div class="wrap reveal">
+    <div class="pricing-head">
+      <h2>Simple, transparent pricing</h2>
+      <p>Pay as you go. No hidden fees. Built for teams and companies of all sizes.</p>
+    </div>
+    <div class="toggle-center">
+      <div class="bill-toggle" role="tablist" aria-label="Billing period">
+        <button class="active" data-bill="m" role="tab" aria-selected="true">Monthly</button>
+        <button data-bill="y" role="tab" aria-selected="false">Yearly <span class="save-badge">2 months free</span></button>
+      </div>
+    </div>
+
+    <div class="price-grid">
+      <!-- Free -->
+      <div class="price-card">
+        <div class="price-name">Free</div>
+        <div class="price-amount-row"><span class="price-amount" data-m="$0" data-y="$0">$0</span><span class="price-per">/month</span></div>
+        <div class="annual-note" data-note=""></div>
+        <ul class="price-features">
+          <li><span class="chk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>1 user per organization</li>
+          <li><span class="chk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>5 interviews per month</li>
+          <li><span class="chk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>Anti-cheating protection</li>
+        </ul>
+        <a class="btn btn-outline price-cta" href="https://next-round.online/" target="_blank" rel="noopener">Get started</a>
+      </div>
+
+      <!-- Pro -->
+      <div class="price-card popular">
+        <span class="pop-badge">Popular</span>
+        <div class="price-name">Pro</div>
+        <div class="price-amount-row"><span class="price-amount" data-m="$139" data-y="$116">$139</span><span class="price-per">/month</span></div>
+        <div class="annual-note" data-note="Billed $1,390 / year"></div>
+        <ul class="price-features">
+          <li><span class="chk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>5 users per organization</li>
+          <li><span class="chk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>15 interviews per month</li>
+          <li><span class="chk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>Anti-cheating protection</li>
+          <li><span class="chk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>Interview recording</li>
+          <li><span class="chk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>AI candidate scoring</li>
+        </ul>
+        <a class="btn btn-primary price-cta" href="https://next-round.online/" target="_blank" rel="noopener">Choose Pro</a>
+      </div>
+
+      <!-- Pro Max -->
+      <div class="price-card">
+        <div class="price-name">Pro Max</div>
+        <div class="price-amount-row"><span class="price-amount" data-m="$314" data-y="$262">$314</span><span class="price-per">/month</span></div>
+        <div class="annual-note" data-note="Billed $3,140 / year"></div>
+        <ul class="price-features">
+          <li><span class="chk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>Unlimited users per organization</li>
+          <li><span class="chk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>Unlimited interviews per month</li>
+          <li><span class="chk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>Anti-cheating protection</li>
+          <li><span class="chk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>Interview recording</li>
+          <li><span class="chk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>AI candidate scoring</li>
+          <li><span class="chk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>Premium support</li>
+        </ul>
+        <a class="btn btn-outline price-cta" href="https://next-round.online/" target="_blank" rel="noopener">Choose Pro Max</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FAQ ============ -->
+<section class="section" id="faq" style="padding-top:0">
+  <div class="wrap reveal">
+    <div class="faq-wrap">
+      <h2>Frequently asked questions</h2>
+      <p class="faq-intro">Straight answers about how the anti-cheating actually works.</p>
+
+      <div class="faq-item open">
+        <button class="faq-q" aria-expanded="true">
+          Why is it impossible to detect an AI cheating app?
+          <span class="faq-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span>
+        </button>
+        <div class="faq-a"><p>AI overlays are the eyes and ears. They run as a desktop app on top of everything else. Even in a clean virtual machine, an overlay still works — because for the end user the information is delivered through system audio and the image on the screen, which no process check can see.</p></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">
+          Why not ask candidates to install detection software that checks processes?
+          <span class="faq-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span>
+        </button>
+        <div class="faq-a"><p>At first glance it seems simple, but the downsides and risks are significant. For candidates, being asked to install software on a personal device sends a bad signal and creates security risks. For companies, it raises real reputation and legal concerns. Our web-based approach removes all of this — no installation, no privacy issues, and no legal complications.</p></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">
+          What makes NextRound different?
+          <span class="faq-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span>
+        </button>
+        <div class="faq-a"><p>NextRound combines keyboard-only signal tracking — tab switching, window switching, copy/paste, and other shortcuts — with multiple-monitor detection. Most importantly, we found an innovative way to eliminate the risk of AI overlays completely, with no desktop software to install.</p></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">
+          How can I validate the anti-cheating system?
+          <span class="faq-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span>
+        </button>
+        <div class="faq-a"><p>Test it yourself by running a mock interview. As the candidate, try one of the popular cheating tools like <a href="https://cluely.com/" target="_blank" rel="noopener">Cluely</a> during a test round — NextRound detects and prevents the attempt in real time. For comparison, try the same thing on a standard Zoom or MS Teams call and you'll see the overlay work unchecked. That contrast is exactly why NextRound exists.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  // billing toggle
+  const billBtns = document.querySelectorAll('.bill-toggle button');
+  const amounts = document.querySelectorAll('.price-amount');
+  const notes = document.querySelectorAll('.annual-note');
+  function setBilling(mode){
+    billBtns.forEach(b=>{
+      const on = b.dataset.bill === mode;
+      b.classList.toggle('active', on);
+      b.setAttribute('aria-selected', on ? 'true' : 'false');
+    });
+    amounts.forEach(a=>{ a.textContent = mode === 'y' ? a.dataset.y : a.dataset.m; });
+    notes.forEach(n=>{ n.textContent = mode === 'y' ? (n.dataset.note || '') : ''; });
+  }
+  billBtns.forEach(b=> b.addEventListener('click', ()=> setBilling(b.dataset.bill)));
+
+  // FAQ accordion
+  document.querySelectorAll('.faq-q').forEach(q=>{
+    q.addEventListener('click', ()=>{
+      const item = q.closest('.faq-item');
+      const isOpen = item.classList.contains('open');
+      item.classList.toggle('open', !isOpen);
+      q.setAttribute('aria-expanded', String(!isOpen));
+    });
+  });
+</script>
+
+<!-- ============ CTA ============ -->
+<section class="section" id="cta" style="padding-top:0">
+  <div class="wrap">
+    <div class="cta reveal">
+      <h2>Start interviewing in minutes</h2>
+      <p>Create your first monitored interview room — candidates join from a browser link.</p>
+      <div class="cta-actions">
+        <a class="btn btn-white" href="https://next-round.online/" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17 10.5V7a1 1 0 0 0-1-1H4a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-3.5l4 4v-11l-4 4Z"/></svg>
+          New interview
+        </a>
+        <a class="btn btn-line" href="#top">Enter a code or link</a>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <a class="brand" href="#top">
+          <svg class="logo-mark" viewBox="0 0 40 40" fill="none" aria-hidden="true">
+            <rect x="2" y="8" width="26" height="24" rx="6" fill="#1a73e8"/>
+            <path d="M30 16.5 L37 12 V28 L30 23.5 Z" fill="#34a853"/>
+            <circle cx="12" cy="15.5" r="2.4" fill="#fbbc04"/>
+            <rect x="8" y="21" width="12" height="3.4" rx="1.7" fill="#ffffff" opacity=".9"/>
+            <circle cx="24.5" cy="27" r="2.2" fill="#ea4335"/>
+          </svg>
+          NextRound
+        </a>
+        <p>The interview room that verifies real skills. Fair by default, monitored by design.</p>
+      </div>
+      <div class="foot-cols">
+        <div class="foot-col">
+          <h5>Product</h5>
+          <a href="#integrity">Integrity monitor</a>
+          <a href="#structure">Interview plans</a>
+          <a href="#review">Recordings</a>
+          <a href="#how">How it works</a>
+        </div>
+        <div class="foot-col">
+          <h5>Company</h5>
+          <a href="#">About</a>
+          <a href="#">Pricing</a>
+          <a href="#">Security</a>
+          <a href="https://next-round.online/" target="_blank" rel="noopener">next-round.online</a>
+        </div>
+        <div class="foot-col">
+          <h5>Legal</h5>
+          <a href="#">Privacy</a>
+          <a href="#">Terms</a>
+          <a href="#">Candidate consent</a>
+        </div>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 NextRound. All rights reserved.</span>
+      <span class="disclaimer">NextRound is an independent product and is not affiliated with, endorsed by, or sponsored by Google LLC. Google Meet is a trademark of Google LLC.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // sticky header shadow
+  const hdr = document.getElementById('hdr');
+  const onScroll = () => hdr.classList.toggle('scrolled', window.scrollY > 8);
+  onScroll(); window.addEventListener('scroll', onScroll, {passive:true});
+
+  // live clock in Meet style: "10:30 AM · Wed, Jul 1"
+  const clock = document.getElementById('clock');
+  function tick(){
+    const d = new Date();
+    const t = d.toLocaleTimeString([], {hour:'numeric', minute:'2-digit'});
+    const day = d.toLocaleDateString([], {weekday:'short', month:'short', day:'numeric'});
+    clock.textContent = t + ' · ' + day;
+  }
+  tick(); setInterval(tick, 10000);
+
+  // scroll reveal
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!reduce && 'IntersectionObserver' in window){
+    const io = new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+    }, {threshold:.12});
+    document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+  } else {
+    document.querySelectorAll('.reveal').forEach(el=>el.classList.add('in'));
+  }
+</script>
+</body>
+</html>

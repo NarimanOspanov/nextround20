@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>NextRound — Interviews room that verify real skills</title>
-<meta name="description" content="NextRound is the interview room for hiring teams. Run live interviews, catch cheating as it happens, and review every candidate on the same fair criteria. Like Google Meet, built for interviewing candidates." />
+<title>NextRound — Interviews 2.0: AI-powered, zero cheating</title>
+<meta name="description" content="NextRound is online interviewing 2.0: an AI interviewer runs first-round screening, and live rounds are protected from AI cheating. Like Google Meet, built for interviewing candidates." />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Roboto:wght@400;500;700&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet" />
@@ -286,15 +286,12 @@
       NextRound
     </a>
     <nav class="nav-links">
-      <a href="#integrity">Integrity</a>
-      <a href="#structure">Interviews</a>
-      <a href="#review">Review</a>
-      <a href="/demo/">Demo</a>
+      <a href="#ai">AI Interviewer</a>
+      <a href="#integrity">Anti-cheating</a>
       <a href="#pricing">Pricing</a>
       <a href="#faq">FAQ</a>
     </nav>
     <div class="nav-right">
-      <span class="clock" id="clock"></span>
       <a class="btn btn-ghost" href="#">Sign in</a>
       <a class="btn btn-primary" href="#cta">Start an interview</a>
       <button class="menu-toggle" aria-label="Menu">
@@ -311,10 +308,10 @@
     <div class="hero-text">
       <span class="eyebrow hero-anim">
         <span class="dots"><i style="background:#1a73e8"></i><i style="background:#34a853"></i><i style="background:#fbbc04"></i><i style="background:#ea4335"></i></span>
-        Like Google Meet — for interviewing candidates
+        Like Google Meet — but for interviews, powered by AI
       </span>
-      <h1 class="hero-title hero-anim d2">Interviews room that <span class="accent">verify real skills</span></h1>
-      <p class="hero-sub hero-anim d3">Run live interviews, catch cheating the moment it happens, and review every candidate against the same fair criteria — all in one room.</p>
+      <h1 class="hero-title hero-anim d2">Interviews 2.0 — <span class="accent">AI-powered</span>. Zero cheating.</h1>
+      <p class="hero-sub hero-anim d3">An AI interviewer runs your first rounds. Live rounds stay cheat-proof. You meet only the candidates worth meeting.</p>
 
       <div class="action-row hero-anim d4">
         <a class="btn btn-primary" href="#cta">
@@ -327,7 +324,7 @@
           <button class="join-btn">Join</button>
         </div>
       </div>
-      <p class="hero-note hero-anim d4">No installs for candidates — they join from a browser link. <a href="#how">See how a round works →</a></p>
+      <p class="hero-note hero-anim d4">No installs for candidates — they join from a browser link. <a href="#ai">See how it works →</a></p>
     </div>
 
     <!-- signature: live interview room -->
@@ -363,93 +360,81 @@
     </div>
   </div>
 
-  <div class="wrap"><div class="carousel-dots hero-anim d4"><i class="on"></i><i></i><i></i><i></i></div></div>
 </section>
 
-<!-- ============ LOGO STRIP ============ -->
-<section class="strip">
-  <div class="wrap">
-    <p class="reveal">Built for teams that hire remotely</p>
-    <div class="strip-logos reveal">
-      <span>Screenly</span><span>IT Bench</span><span>Digital Nomads</span><span>Remote CIS</span><span>TalentLoop</span>
-    </div>
-  </div>
-</section>
-
-<!-- ============ STAKES styles ============ -->
+<!-- ============ AI INTERVIEWER styles ============ -->
 <style>
-  .stakes-head{text-align:center; max-width:680px; margin:0 auto;}
-  .stakes-eyebrow{font-size:13px; font-weight:600; letter-spacing:.05em; text-transform:uppercase; color:var(--red); margin-bottom:14px;}
-  .stakes-head h2{font-size:clamp(28px,3.4vw,40px); line-height:1.12;}
-  .stakes-head p{color:var(--grey); font-size:18px; margin-top:16px;}
-
-  .stakes-stats{display:grid; grid-template-columns:1.25fr 1fr; gap:22px; margin-top:44px;}
-  .stat-card{background:var(--bg-soft); border-radius:22px; padding:34px 34px 32px; display:flex; flex-direction:column; justify-content:center;}
-  .people-row{display:flex; flex-wrap:wrap; gap:7px; margin-bottom:22px;}
-  .people-row .p{width:27px; height:27px; display:block;}
-  .people-row .p svg{width:100%; height:100%;}
-  .people-row .p.on{color:var(--red);}
-  .people-row .p.off{color:#d3d6da;}
-  .stat-big{font-family:"Poppins"; font-weight:600; font-size:clamp(38px,5.4vw,58px); line-height:1; letter-spacing:-.02em; color:var(--ink);}
-  .stat-big .sub{font-size:.42em; font-weight:500; color:var(--grey); letter-spacing:0;}
-  .stat-label{color:var(--grey); font-size:15.5px; margin-top:14px; max-width:24em;}
-  .stat-card.cost{align-items:flex-start; background:var(--tint-red);}
-  .stat-card.cost .stat-big{color:#c5221f;}
-
-  .cost-head{font-family:"Poppins"; font-weight:600; font-size:20px; text-align:center; margin:52px 0 22px;}
-  .cost-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:16px;}
-  .cost-item{display:flex; align-items:center; gap:14px; padding:18px 20px; border:1px solid var(--line); border-radius:14px; background:#fff; font-size:15px; font-weight:500; transition:.18s;}
-  .cost-item:hover{box-shadow:var(--elev-1); border-color:#c7ccd1;}
-  .cost-item .cico{width:38px; height:38px; border-radius:10px; background:var(--tint-red); color:var(--red); display:flex; align-items:center; justify-content:center; flex:none;}
-  .cost-item .cico svg{width:19px; height:19px;}
-  @media (max-width:920px){
-    .stakes-stats{grid-template-columns:1fr;}
-    .cost-grid{grid-template-columns:1fr;}
-  }
-  @media (min-width:521px) and (max-width:920px){ .cost-grid{grid-template-columns:1fr 1fr;} }
+  .ai-chat{background:#fff; border:1px solid var(--line); border-radius:18px; padding:20px; box-shadow:var(--elev-1);}
+  .ai-chat-head{display:flex; align-items:center; gap:10px; padding-bottom:14px; border-bottom:1px solid var(--line); margin-bottom:14px;}
+  .ai-chat-head .avatar-sm{background:var(--blue); color:#fff;}
+  .ai-chat-head b{font-size:14.5px;}
+  .ai-chat-head span{display:block; font-size:12.5px; color:var(--grey);}
+  .ai-live{margin-left:auto; display:inline-flex; align-items:center; gap:6px; font-size:12px; font-weight:600; color:var(--green);}
+  .ai-live i{width:7px; height:7px; border-radius:50%; background:var(--green); animation:blink 1.6s infinite;}
+  .ai-msg{max-width:88%; padding:10px 14px; border-radius:14px; font-size:14px; line-height:1.45; margin-bottom:10px;}
+  .ai-msg.bot{background:var(--tint-blue); border-bottom-left-radius:4px;}
+  .ai-msg.cand{background:var(--bg-soft); margin-left:auto; border-bottom-right-radius:4px;}
+  .ai-msg .who{display:block; font-size:11.5px; font-weight:600; letter-spacing:.03em; text-transform:uppercase; color:var(--grey); margin-bottom:3px;}
+  .ai-msg .ctx{display:inline-flex; align-items:center; gap:6px; margin-top:8px; font-size:12px; font-weight:600; color:var(--blue); background:#fff; border:1px solid var(--line); border-radius:var(--r-pill); padding:4px 10px;}
+  .ai-msg .ctx svg{width:13px; height:13px;}
+  .ai-wave{display:flex; align-items:center; gap:3px; padding:6px 2px 0;}
+  .ai-wave i{width:3px; border-radius:2px; background:var(--blue); animation:wave 1s ease-in-out infinite;}
+  .ai-wave i:nth-child(1){height:8px;} .ai-wave i:nth-child(2){height:14px; animation-delay:.1s;}
+  .ai-wave i:nth-child(3){height:18px; animation-delay:.2s;} .ai-wave i:nth-child(4){height:12px; animation-delay:.3s;}
+  .ai-wave i:nth-child(5){height:7px; animation-delay:.4s;}
+  @keyframes wave{0%,100%{transform:scaleY(.5);}50%{transform:scaleY(1);}}
 </style>
 
-<!-- ============ STAKES ============ -->
-<section class="section" id="stakes">
-  <div class="wrap reveal">
-    <div class="stakes-head">
-      <div class="stakes-eyebrow">The stakes</div>
-      <h2>Cheating is the new normal. Bad hires are expensive.</h2>
-      <p>AI cheating tools have quietly changed technical interviews. The candidates who slip through don't just underperform — they cost you across the entire hiring cycle.</p>
+<!-- ============ FEATURE 5 · AI INTERVIEWER ============ -->
+<section class="section" id="ai" style="padding-top:0">
+  <div class="wrap feat reveal">
+    <div class="feat-text">
+      <div class="feat-eyebrow" style="color:var(--blue)">Round 1 · AI Interviewer</div>
+      <h2>Let AI run the first round for you</h2>
+      <p class="lead">An AI interviewer joins the room like a real participant — it greets the candidate, talks naturally, watches the screen share, and follows your interview plan. You get the transcript and scores, not another hour in your calendar.</p>
+      <ul class="feat-list">
+        <li>
+          <div class="li-ico" style="background:var(--tint-blue); color:var(--blue)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15a3 3 0 0 0 3-3V6a3 3 0 0 0-6 0v6a3 3 0 0 0 3 3Z"/><path d="M19 12a7 7 0 0 1-14 0M12 19v3"/></svg></div>
+          <div><b>Talks like a person</b><span>Real-time voice with natural turn-taking — candidates can interrupt, think out loud, and switch languages mid-call.</span></div>
+        </li>
+        <li>
+          <div class="li-ico" style="background:var(--tint-green); color:var(--green)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg></div>
+          <div><b>Sees the screen share</b><span>It reads the candidate's code, portfolio, or task live — and asks follow-up questions about what's actually on screen.</span></div>
+        </li>
+        <li>
+          <div class="li-ico" style="background:var(--tint-yellow); color:#b8860b"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3 8-8"/><path d="M20 12v7a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h9"/></svg></div>
+          <div><b>Sticks to your plan</b><span>Every candidate gets the same structured screening — same questions, same bar, zero scheduling.</span></div>
+        </li>
+        <li>
+          <div class="li-ico" style="background:var(--tint-red); color:var(--red)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6Z"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/></svg></div>
+          <div><b>Transcript &amp; scoring in minutes</b><span>A full transcript and an AI scorecard against your criteria land in the shared workspace right after the call.</span></div>
+        </li>
+      </ul>
     </div>
-
-    <div class="stakes-stats">
-      <div class="stat-card">
-        <div class="people-row" aria-hidden="true">
-          <span class="p on"><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="7" r="4.2"/><path d="M12 13c-4.4 0-8 2.9-8 6.5V21h16v-1.5c0-3.6-3.6-6.5-8-6.5Z"/></svg></span>
-          <span class="p on"><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="7" r="4.2"/><path d="M12 13c-4.4 0-8 2.9-8 6.5V21h16v-1.5c0-3.6-3.6-6.5-8-6.5Z"/></svg></span>
-          <span class="p on"><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="7" r="4.2"/><path d="M12 13c-4.4 0-8 2.9-8 6.5V21h16v-1.5c0-3.6-3.6-6.5-8-6.5Z"/></svg></span>
-          <span class="p on"><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="7" r="4.2"/><path d="M12 13c-4.4 0-8 2.9-8 6.5V21h16v-1.5c0-3.6-3.6-6.5-8-6.5Z"/></svg></span>
-          <span class="p on"><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="7" r="4.2"/><path d="M12 13c-4.4 0-8 2.9-8 6.5V21h16v-1.5c0-3.6-3.6-6.5-8-6.5Z"/></svg></span>
-          <span class="p on"><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="7" r="4.2"/><path d="M12 13c-4.4 0-8 2.9-8 6.5V21h16v-1.5c0-3.6-3.6-6.5-8-6.5Z"/></svg></span>
-          <span class="p on"><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="7" r="4.2"/><path d="M12 13c-4.4 0-8 2.9-8 6.5V21h16v-1.5c0-3.6-3.6-6.5-8-6.5Z"/></svg></span>
-          <span class="p off"><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="7" r="4.2"/><path d="M12 13c-4.4 0-8 2.9-8 6.5V21h16v-1.5c0-3.6-3.6-6.5-8-6.5Z"/></svg></span>
-          <span class="p off"><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="7" r="4.2"/><path d="M12 13c-4.4 0-8 2.9-8 6.5V21h16v-1.5c0-3.6-3.6-6.5-8-6.5Z"/></svg></span>
-          <span class="p off"><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="7" r="4.2"/><path d="M12 13c-4.4 0-8 2.9-8 6.5V21h16v-1.5c0-3.6-3.6-6.5-8-6.5Z"/></svg></span>
+    <div class="feat-visual">
+      <div class="panel blue">
+        <div class="ai-chat" aria-label="AI interviewer conversation preview">
+          <div class="ai-chat-head">
+            <div class="avatar-sm">AI</div>
+            <div><b>Aina · AI Interviewer</b><span>Senior Backend Engineer · first-round screening</span></div>
+            <span class="ai-live"><i></i> In call</span>
+          </div>
+          <div class="ai-msg bot">
+            <span class="who">Aina · AI</span>
+            Hi Aida! I'm Aina, the AI interviewer for this role. The call is recorded and analyzed — ready to start?
+          </div>
+          <div class="ai-msg cand">
+            <span class="who">Aida K. · Candidate</span>
+            Sure. I'll share my screen and walk you through the project.
+          </div>
+          <div class="ai-msg bot">
+            <span class="who">Aina · AI</span>
+            I can see your editor — a FastAPI service with <b>schemas</b>, <b>models</b> and <b>api</b> modules. How does the payment webhook stay idempotent under retries?
+            <span class="ctx"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg> Watching screen share</span>
+          </div>
+          <div class="ai-wave" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
         </div>
-        <div class="stat-big">7 <span class="sub">in 10</span></div>
-        <p class="stat-label">candidates cheat in technical online interviews using AI tools, as of 2026.</p>
       </div>
-
-      <div class="stat-card cost">
-        <div class="stat-big">$10k–$100k</div>
-        <p class="stat-label">is what a single bad hire can cost your company.</p>
-      </div>
-    </div>
-
-    <div class="cost-head">Where the cost of a bad hire hides</div>
-    <div class="cost-grid">
-      <div class="cost-item"><span class="cico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M19 8v6M22 11h-6"/></svg></span>Employee onboarding &amp; ramp-up</div>
-      <div class="cost-item"><span class="cico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><path d="M16 17l5-5-5-5M21 12H9"/></svg></span>Offboarding &amp; knowledge transfer</div>
-      <div class="cost-item"><span class="cico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 0 1 15-6.7L21 8M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-15 6.7L3 16M3 21v-5h5"/></svg></span>Replacement &amp; re-hiring costs</div>
-      <div class="cost-item"><span class="cico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18M7 7l-4 6h8L7 7ZM17 7l-4 6h8l-4-6Z"/><path d="M4 21h16"/></svg></span>Legal &amp; compliance risks</div>
-      <div class="cost-item"><span class="cico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 18l-8-8-5 5-7-7"/><path d="M17 18h6v-6"/></svg></span>Lost team productivity</div>
-      <div class="cost-item"><span class="cico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 2l4 4-4 4"/><path d="M3 11v-1a4 4 0 0 1 4-4h14M7 22l-4-4 4-4"/><path d="M21 13v1a4 4 0 0 1-4 4H3"/></svg></span>Manager &amp; team rework time</div>
     </div>
   </div>
 </section>
@@ -458,9 +443,9 @@
 <section class="section" id="integrity">
   <div class="wrap feat reveal">
     <div class="feat-text">
-      <div class="feat-eyebrow" style="color:var(--red)">Zero-cheating interview room</div>
-      <h2>See what happens during the interview</h2>
-      <p class="lead">NextRound surfaces the signals that reveal coached or AI-assisted answers — clearly, and in context, so you never have to guess.</p>
+      <div class="feat-eyebrow" style="color:var(--red)">Round 2 · Live with your team</div>
+      <h2>Then meet them live — with zero cheating</h2>
+      <p class="lead"><b>7 in 10</b> candidates cheat with AI tools in live interviews. NextRound flags the signals in real time — so you never have to guess.</p>
       <ul class="feat-list">
         <li>
           <div class="li-ico" style="background:var(--tint-blue); color:var(--blue)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M3 9h18"/></svg></div>
@@ -485,139 +470,6 @@
           <div class="feed-row flag"><div class="fico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg></div><div><b>Pasted into answer</b><div class="keys"><span class="kbd">Ctrl</span><span class="kbd">V</span></div></div><span class="ft">13:02</span></div>
           <div class="feed-row flag"><div class="fico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="13" height="9" rx="2"/><rect x="9" y="10" width="13" height="9" rx="2"/></svg></div><div><b>Second display detected</b></div><span class="ft">13:05</span></div>
           <div class="feed-row ok"><div class="fico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div><div><b>Returned to interview</b></div><span class="ft">13:20</span></div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============ FEATURE 2 · STRUCTURE ============ -->
-<section class="section" id="structure" style="padding-top:0">
-  <div class="wrap feat rev reveal">
-    <div class="feat-visual">
-      <div class="panel blue">
-        <div class="plan-card">
-          <span class="tag">Senior Backend Engineer</span>
-          <div class="plan-q"><span class="num">1</span> Walk through a system you scaled past its first bottleneck.</div>
-          <div class="plan-q"><span class="num">2</span> How do you design an idempotent payment webhook?</div>
-          <div class="plan-q"><span class="num">3</span> Debug: this query is slow under load. Where do you look?</div>
-        </div>
-        <div class="plan-card" style="margin-bottom:0">
-          <span class="tag" style="color:var(--green); background:var(--tint-green)">Same bar, every candidate</span>
-          <div class="plan-q"><span class="num">4</span> Trade-offs: SQL vs. event sourcing for this feature.</div>
-        </div>
-      </div>
-    </div>
-    <div class="feat-text">
-      <div class="feat-eyebrow" style="color:var(--blue)">Structured interviews</div>
-      <h2>Hold every candidate to the same fair bar</h2>
-      <p class="lead">Plan, run, and review in one place. Build a structured plan per role so the conversation stays on the core signals — and everyone is measured the same way.</p>
-      <ul class="feat-list">
-        <li>
-          <div class="li-ico" style="background:var(--tint-blue); color:var(--blue)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3 8-8"/><path d="M20 12v7a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h9"/></svg></div>
-          <div><b>Interview plans with tailored questions</b><span>Role-specific plans keep the round focused and repeatable across your team.</span></div>
-        </li>
-        <li>
-          <div class="li-ico" style="background:var(--tint-green); color:var(--green)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h4l3 8 4-16 3 8h4"/></svg></div>
-          <div><b>One shared workspace</b><span>Everything the panel needs — plan, room, and notes — lives in a single place.</span></div>
-        </li>
-      </ul>
-    </div>
-  </div>
-</section>
-
-<!-- ============ FEATURE 3 · RECORDINGS ============ -->
-<section class="section" id="review" style="padding-top:0">
-  <div class="wrap feat reveal">
-    <div class="feat-text">
-      <div class="feat-eyebrow" style="color:var(--green)">Recordings</div>
-      <h2>Share the interview, not your memory</h2>
-      <p class="lead">Every round is recorded and stored securely. Send a link to hiring managers and peers instead of trying to retell what happened.</p>
-      <ul class="feat-list">
-        <li>
-          <div class="li-ico" style="background:var(--tint-green); color:var(--green)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 7l-7 5 7 5V7Z"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg></div>
-          <div><b>Stored recordings you can share</b><span>Secure links let the whole panel review on their own time.</span></div>
-        </li>
-        <li>
-          <div class="li-ico" style="background:var(--tint-blue); color:var(--blue)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.6 13.5l6.8 4M15.4 6.5l-6.8 4"/></svg></div>
-          <div><b>Jump to the flagged moments</b><span>Integrity events are pinned on the timeline, so reviewers go straight to them.</span></div>
-        </li>
-      </ul>
-    </div>
-    <div class="feat-visual">
-      <div class="panel green">
-        <div class="rec-card">
-          <div class="rec-thumb">
-            <div class="play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></div>
-            <div class="rec-scrub"><i></i></div>
-          </div>
-          <div class="rec-foot">
-            <div class="avatar-sm">AK</div>
-            <div><div class="rf-name">Aida K. — Senior Backend Engineer</div><div class="rf-sub">Recorded Jul 1 · 42 min · 3 flags</div></div>
-            <span class="share"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.6 13.5l6.8 4M15.4 6.5l-6.8 4"/></svg> Share</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============ FEATURE 4 · SCORECARDS + AI ============ -->
-<section class="section" style="padding-top:0">
-  <div class="wrap feat rev reveal">
-    <div class="feat-visual">
-      <div class="panel yellow">
-        <div class="score-card">
-          <div class="score-head"><div class="avatar-sm">AK</div><div><b>Aida K.</b><br><span>Senior Backend Engineer</span></div></div>
-          <div class="score-row"><span class="sl">System design</span><div class="bar"><i style="width:88%"></i></div><span class="sv">4.4</span></div>
-          <div class="score-row"><span class="sl">Coding</span><div class="bar"><i style="width:76%; background:var(--green)"></i></div><span class="sv">3.8</span></div>
-          <div class="score-row"><span class="sl">Communication</span><div class="bar"><i style="width:92%; background:var(--yellow)"></i></div><span class="sv">4.6</span></div>
-          <div class="ai-summary">
-            <b><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.9 4.6L18.5 9.5 13.9 11.4 12 16l-1.9-4.6L5.5 9.5l4.6-1.9L12 3Z"/></svg> AI summary</b>
-            Strong on distributed systems and trade-off reasoning. One integrity flag (paste at 13:02) worth reviewing before the next round.
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="feat-text">
-      <div class="feat-eyebrow" style="color:#b8860b">Fair decisions</div>
-      <h2>Decide with evidence, not vibes</h2>
-      <p class="lead">Capture structured feedback with shared scorecards and ratings. An AI summary highlights strengths and risks against the same criteria for every candidate.</p>
-      <ul class="feat-list">
-        <li>
-          <div class="li-ico" style="background:var(--tint-yellow); color:#b8860b"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l3 6.9 7.5.6-5.7 4.9 1.8 7.3L12 17.8 5.4 21.7l1.8-7.3L1.5 9.5 9 8.9 12 2Z"/></svg></div>
-          <div><b>Scorecards &amp; ratings</b><span>Same criteria, same weights — so panels compare like for like.</span></div>
-        </li>
-        <li>
-          <div class="li-ico" style="background:var(--tint-blue); color:var(--blue)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.9 4.6L18.5 9.5 13.9 11.4 12 16l-1.9-4.6L5.5 9.5l4.6-1.9L12 3Z"/></svg></div>
-          <div><b>Unbiased AI support</b><span>A consistent summary of strengths and risks, applied identically to everyone.</span></div>
-        </li>
-      </ul>
-    </div>
-  </div>
-</section>
-
-<!-- ============ HOW IT WORKS ============ -->
-<section class="section" id="how" style="padding-top:0">
-  <div class="wrap">
-    <div class="how reveal">
-      <h2>Three steps to a fair round</h2>
-      <p class="how-sub">Plan it, run it, review it — without leaving NextRound.</p>
-      <div class="steps">
-        <div class="step">
-          <div class="n" style="background:var(--blue)">1</div>
-          <h3>Plan</h3>
-          <p>Pick a role template and set the questions every candidate will answer.</p>
-        </div>
-        <div class="step">
-          <div class="n" style="background:var(--green)">2</div>
-          <h3>Interview</h3>
-          <p>Meet the candidate in a monitored room. Integrity signals record as you talk.</p>
-        </div>
-        <div class="step">
-          <div class="n" style="background:var(--yellow)">3</div>
-          <h3>Review</h3>
-          <p>Compare recordings, scorecards, and AI summaries — then decide with confidence.</p>
         </div>
       </div>
     </div>
@@ -839,10 +691,10 @@
       <div class="foot-cols">
         <div class="foot-col">
           <h5>Product</h5>
-          <a href="#integrity">Integrity monitor</a>
-          <a href="#structure">Interview plans</a>
-          <a href="#review">Recordings</a>
-          <a href="#how">How it works</a>
+          <a href="#ai">AI Interviewer</a>
+          <a href="#integrity">Anti-cheating</a>
+          <a href="#pricing">Pricing</a>
+          <a href="#faq">FAQ</a>
         </div>
         <div class="foot-col">
           <h5>Company</h5>
@@ -871,16 +723,6 @@
   const hdr = document.getElementById('hdr');
   const onScroll = () => hdr.classList.toggle('scrolled', window.scrollY > 8);
   onScroll(); window.addEventListener('scroll', onScroll, {passive:true});
-
-  // live clock in Meet style: "10:30 AM · Wed, Jul 1"
-  const clock = document.getElementById('clock');
-  function tick(){
-    const d = new Date();
-    const t = d.toLocaleTimeString([], {hour:'numeric', minute:'2-digit'});
-    const day = d.toLocaleDateString([], {weekday:'short', month:'short', day:'numeric'});
-    clock.textContent = t + ' · ' + day;
-  }
-  tick(); setInterval(tick, 10000);
 
   // scroll reveal
   const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
